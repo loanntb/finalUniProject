@@ -1,0 +1,91 @@
+//- extends ../layout
+
+//- block content
+//-   section.section-contact.bg1-pattern.p-t-90.p-b-113
+//-     .container
+//-       h3.tit7.t-center.p-b-62.p-t-105 Đăng nhập hệ thống
+//-       form.wrap-form-reservation.size22.m-l-r-auto(method='POST')
+//-         .row
+//-           .col-12
+//-             label.txt9(for="email") Email
+//-             .wrap-inputname.size12.bo2.bo-rad-10.m-t-3.m-b-23
+//-               input.bo-rad-10.sizefull.txt10.p-l-20(type='email', name='email', id='email', placeholder='Email', autofocus, autocomplete='email', required)
+//-           .col-12
+//-             label.txt9(for="password") Password
+//-             .wrap-inputname.size12.bo2.bo-rad-10.m-t-3.m-b-23
+//-               input.bo-rad-10.sizefull.txt10.p-l-20(type='password', name='password', id='password', placeholder='Password', autocomplete='current-password', required)
+//-           .col-md-4
+//-             button.btn3.w-full.txt11.trans-0-4.p-t-10.p-b-10.m-b-10(type="submit")
+//-               i.fa.fa-user-circle-o.fa-2x(aria-hidden="true")
+//-               | Đăng nhập
+//-           .col-md-4
+//-             a.btn.w-full.btn-social.btn-facebook.p-t-10.p-b-10.bo-rad-10.m-b-10(href='/auth/facebook')
+//-               i.fa.fa-facebook.fa-1x(aria-hidden="true")
+//-               | Sign in with Facebook
+//-           .col-md-4
+//-             a.btn.w-full.btn-social.btn-google.p-t-10.p-b-10.bo-rad-10.m-b-10(href='/auth/google')
+//-               i.fa.fa-google.fa-1x(aria-hidden="true")
+//-               | Sign in with Google
+//-           .col-12
+//-             a.btn.btn-link.pl-0(href='/forgot') Quên mật khẩu?
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title #{title}-Khách Sạn Sao Xanh
+    link(rel='stylesheet', href='/admin/vendor/bootstrap/bootstrap.min.css')
+    link(rel='stylesheet', href='/fonts/font-awesome-4.7.0/css/font-awesome.min.css')
+    //- link(rel='stylesheet', href='/admin/vendor/Ionicons/ionicons.min.css')
+    link(rel='stylesheet', href='/admin/css/AdminLTE.min.css')
+    link(rel='stylesheet', href='/admin/vendor/iCheck/square/blue.css')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic')
+  body.hold-transition.login-page
+    .login-box
+      .login-logo
+        a(href="/")
+          b Quản lý khách sạn
+      .login-box-body
+        p.login-box-msg Đăng nhập hệ thống
+        include ../partials/flash
+        form(method="POST")
+          .form-group.has-feedback
+            input(type='hidden', name='_csrf', value=_csrf)
+            input.form-control(type="email", name="email", placeholder="Email")
+            span.fa.fa-envelope.form-control-feedback
+          .form-group.has-feedback
+            input.form-control(type="password", name="password", placeholder="Password")
+            span.fa.fa-lock.form-control-feedback
+          .row
+            .col-xs-8
+              .checkbox.icheck
+                label
+                  input(type="checkbox")
+                  | Remember Me
+            .col-xs-4
+              button.btn.btn-primary.btn-block.btn-flat(type="submit") Sign In
+
+        .social-auth-links.text-center
+          p - OR
+          a.btn.btn-block.btn-social.btn-facebook.btn-flat(href="#")
+            i.fa.fa-facebook
+            | Đăng nhập bằng Facebook
+          a.btn.btn-block.btn-social.btn-google.btn-flat(href="#")
+            i.fa.fa-google-plus
+            | Đăng nhập bằng Google
+
+        a(href="/forgot") Quên mật khẩu?
+        br
+        a.text-center(href="/signup") Bạn chưa có tài khoản?
+
+    script(src='/vendor/jquery/jquery-3.2.1.min.js')
+    script(src='/admin/vendor/bootstrap/bootstrap.min.js')
+    script(src='/admin/vendor/iCheck/icheck.min.js')
+    script(type="text/javascript").
+      $(function () {
+        $('input').iCheck({
+          checkboxClass: 'icheckbox_square-blue',
+          radioClass: 'iradio_square-blue',
+          increaseArea: '20%' /* optional */
+        });
+      });

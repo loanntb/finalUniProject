@@ -1,0 +1,24 @@
+section.section-intro
+  .header-intro.parallax100.t-center.p-t-135.p-b-158(style="background-image: url(images/bg-intro-01.jpg);")
+    span.tit2.p-l-15.p-r-15 Khám phá
+    h4.tit4.t-center.p-l-15.p-r-15.p-t-3 Khách Sạn
+  .content-intro.bg-white.p-t-77.p-b-133
+    .container
+     if typeof(data.intro)!= "undefined"
+      .row
+       each item in data.intro
+        .col-md-4.p-t-30
+          .blo1
+            .wrap-pic-blo1.bo-rad-10.hov-img-zoom
+              a(href=item.url)
+                img(src=item.image?item.image:'', alt="IMG-INTRO", style="width: 360px;height: 214px;")
+            .wrap-text-blo1.p-t-35
+              a(href="")
+                h4.txt5.color0-hov.trans-0-4.m-b-13=item.service
+              p.m-b-20=item.description?item.description:''
+              a.txt4(href=item.url?item.url:'') Xem thêm
+                i.fa.fa-long-arrow-right.m-l-10(aria-hidden="true")
+
+       
+
+               

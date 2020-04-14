@@ -1,0 +1,81 @@
+extends ../admin_layout
+block content
+  section.content-header
+    h1 Trang Cafe
+    ol.breadcrumb
+      li
+        a(href="/")
+          i.fa.fa-dashboard
+          | Home
+      li.active Trang chủ
+
+  section.content         
+    .row
+            .col-md-6
+              .box.box-success
+                .box-header.with-border
+                form(action='/pages/cafe', method='POST')
+                  input(type='hidden', name='_csrf', value=_csrf)
+                  .box-body
+                    .form-group
+                      label(for="description") Mô tả chung 
+                      textarea.form-control(type="text", id="description", name="description", autocomplete='description')=data.info.description?data.info.description:''
+                    .form-group
+                      label(for="description") Địa chỉ 
+                      input.form-control(type="text",value=data.info.address?data.info.address:'', id="description", name="address", autocomplete='description')
+                    .form-group
+                      label(for="description") Số điện thoại 
+                      input.form-control(type="tel", value=data.info.phone?data.info.phone:'' id="description", name="phone")
+                   
+                  .box-footer
+                    button.btn.btn-primary(type="submit")
+                      i.fa.fa-save.p-r-5
+                      | Submit                      
+            .col-md-6
+              .box.box-success
+                  .box-header.with-border
+                  form(action='/pages/cafe/slide', method='POST',enctype='multipart/form-data')
+                    input(type='hidden', name='_csrf', value=_csrf)
+                    .box-body
+                      include upload
+                    .box-footer
+                      button.btn.btn-primary(type="submit")
+                        i.fa.fa-save.p-r-5
+                        | Submit                                       
+            .col-md-12
+              .box.box-success
+                .box-header.with-border
+                  h3.box-title Danh sách ảnh
+                .box-body.table-responsive.no-padding
+                    <table class="table table-hover ">
+                     <thead>
+                      <tr>
+                        <th>Image</th>
+                        <th>Action</th>
+                      </tr>
+                      </thead> 
+                    
+                      <tbody>
+                          
+                      - var i=0
+                      if typeof(data.slides)!= "undefined"
+                        each item in data.slides    
+                            tr
+                              td
+                               img(class="img-thumbnail" ,style="width: 50px;height: 50px;", src=item.image)
+                              
+                              td 
+                                button(class='btn btn-danger' onclick="deleteRoom("+i+")" ) 
+                                  <i class="fa fa-trash"></i>
+                                - i++;
+                      <tbody>          
+                    </table>
+
+                form(action='/pages/cafe/delete',class="visible", method='POST',id="senddata2")
+                  input(type='hidden', name='_csrf', value=_csrf)
+                  input(type='hidden', name='id',id="imgurl2")
+                script(type='text/javascript').
+                      function deleteRoom(id){
+                        $('#imgurl2').val(id);
+                        $( "#senddata2" ).submit();
+                          };        

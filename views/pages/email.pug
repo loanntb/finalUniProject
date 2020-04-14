@@ -1,0 +1,35 @@
+extends ../admin_layout
+
+//- block append head
+//-   link(rel='stylesheet', href='/admin/vendor/iCheck/square/blue.css')
+
+block content
+  section.content-header
+    h1 Thông tin email hệ thống
+    ol.breadcrumb
+      li
+        a(href="/")
+          i.fa.fa-dashboard
+          | Home
+      li.active Profile
+  section.content
+    .row
+      .col-md-6
+        .box.box-primary
+          .box-header.with-border
+            h3.box-title Yêu cầu email là Gmail
+          form(action='/pages/email', method='POST')
+            input(type='hidden', name='_csrf', value=_csrf)
+            .box-body
+              .form-group
+                label(for="email") Email address
+                input.form-control(type="email", id="email", name="email", value=data.email?data.email:'', autocomplete='email')
+              .form-group
+                label(for="password") Password
+                input.form-control(type='text', name='password', value=data.password?data.password:'')
+            .box-footer
+              button.btn.btn-primary(type="submit")
+                i.fa.fa-pencil.p-r-5
+                | Update Email
+
+

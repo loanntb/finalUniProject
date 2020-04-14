@@ -1,0 +1,87 @@
+extends ../admin_layout
+block content
+  section.content-header
+    h1 Liên hệ
+    ol.breadcrumb
+      li
+        a(href="/")
+          i.fa.fa-dashboard
+          | Home
+      li.active Trang chủ
+
+  section.content         
+    .row
+            .col-md-6
+              .box.box-success
+                .box-header.with-border
+              
+                form(action='/pages/contact', method='POST', enctype='multipart/form-data')
+                  input(type='hidden', name='_csrf', value=_csrf)
+                  input(type='hidden', name='img', value=data.info.image)
+                  .box-body
+                    .form-group
+                      label(for="description") Mô tả chung 
+                      textarea.form-control(type="text", id="description", name="description", autocomplete='description')=data.info.description?data.info.description:''
+                    .form-group
+                      label(for="description") Địa chỉ 
+                      input.form-control(type="text",value=data.info.address?data.info.address:'', id="description", name="address", autocomplete='description')
+                    .form-group
+                      label(for="description") Số điện thoại 
+                      input.form-control(type="tel",value=data.info.phone?data.info.phone:'', id="description", name="phone")
+                    .form-group
+                      label(for="description") Email 
+                      input.form-control(type="text",value=data.info.email?data.info.email:'' id="description", name="email")
+                    .form-group
+                      label(for="description") Giờ mở cửa
+                      input.form-control(type="text", id="url",value=data.info.openhour?data.info.openhour:'', name="openhour", autocomplete='welcome_url')
+                    .form-group
+                        <label for="exampleInputFile">Upload</label>
+                        <input type="file" id="welcome" name="contact">
+                        <p class="help-block">Kích thước ảnh: 720 x 959</p>
+                        if data.info.image
+                         img(src=data.info.image?data.info.image:'',class="img-responsive img-thumbnail ",style="width: 200px;height: 150px;",id="img", alt="")    
+                  .box-footer
+                    button.btn.btn-primary(type="submit")
+                      i.fa.fa-save.p-r-5
+                      | Submit    
+            .col-md-6
+              .box.box-success
+                .box-header.with-border
+                  h3.box-title Danh sách liên hệ
+                .box-body.table-responsive.no-padding
+                    <table class="table table-hover ">
+                     <thead>
+                      <tr>
+                        <th>Tên</th>
+                        <th>Email</th>
+                        <th>Điện thoại</th>
+                        <th>Lời nhắn</th>
+                        <th></th>
+                      </tr>
+                      </thead> 
+                      <tbody>
+                      - var i=0
+                    if data.contact     
+                      each item in data.contact    
+                          tr
+                            td= item.name
+                            td= item.email
+                            td= item.phone
+                            td= item.msessage
+                            td 
+                              button(class='btn btn-danger' onclick="deleteRoom("+i+")" ) 
+                                <i class="fa fa-trash"></i>
+                              - i++;
+                    <tbody>        
+                    </table>
+
+                form(action='/pages/contact/delete',class="visible", method='POST',id="senddata2")
+                  input(type='hidden', name='_csrf', value=_csrf)
+                  input(type='hidden', name='id',id="imgurl2")
+                script(type='text/javascript').
+                      function deleteRoom(id){
+                        $('#imgurl2').val(id);
+                        $( "#senddata2" ).submit();
+                          };        
+                                    
+

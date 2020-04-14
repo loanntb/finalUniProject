@@ -1,0 +1,38 @@
+extends layout
+
+block content
+  .bg-title-page.flex-c-m.p-t-160.p-b-80.p-l-15.p-r-15(style="background-image: url(images/bg-title-page-01.jpg);")
+    h2.tit6.t-center Menu
+  section.section-mainmenu.p-t-110.p-b-70.bg1-pattern
+    .container
+      .row
+        .col-md-10.col-lg-6.p-r-35.p-r-15-lg.m-l-r-auto
+          .wrap-item-mainmenu.p-b-22
+            h3.tit-mainmenu.tit10.p-b-25
+              | Drinks / Đồ uống
+            // Item mainmenu
+          if typeof(data.drink)!= "undefined" 
+            each item in data.drink  
+              .item-mainmenu.m-b-36
+                .flex-w.flex-b.m-b-3
+                  a.name-item-mainmenu.txt21=item.name
+                  .line-item-mainmenu.bg3-pattern
+                  .price-item-mainmenu.txt22='$'+item.price 
+                span.info-item-mainmenu.txt23=item.description
+      
+          
+        .col-md-10.col-lg-6.p-l-35.p-l-15-lg.m-l-r-auto
+          .wrap-item-mainmenu.p-b-22
+            h3.tit-mainmenu.tit10.p-b-25
+              | Food / Món ăn
+            // Item mainmenu
+          if typeof(data.food)!= "undefined"  
+            each item in data.food 
+              .item-mainmenu.m-b-36
+                .flex-w.flex-b.m-b-3
+                  a.name-item-mainmenu.txt21=item.name
+                  .line-item-mainmenu.bg3-pattern
+                  .price-item-mainmenu.txt22='$'+item.price    
+                span.info-item-mainmenu.txt23=item.description
+  include partials/home/table_booking              
+         

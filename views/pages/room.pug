@@ -1,0 +1,105 @@
+extends ../admin_layout
+block content
+  section.content-header
+    h1 Phòng
+    ol.breadcrumb
+      li
+        a(href="/")
+          i.fa.fa-dashboard
+          | Home
+      li.active Trang chủ
+
+  section.content         
+    .row
+            .col-md-6
+              .box.box-success
+                .box-header.with-border
+                  h3.box-title Loại phòng
+                form(action='/pages/room', method='POST', enctype='multipart/form-data')
+                  input(type='hidden', name='_csrf', value=_csrf)
+                  input(type='hidden',id="link", name='img')
+                  input(type='hidden',id="link1", name='id')
+                  .box-body
+                    .form-group
+                      label(for="description") Loại phòng 
+                      input.form-control(type="text", id="type", name="type", autocomplete='description')
+                      .form-group
+                      label(for="description") Mô tả chung 
+                      input.form-control(type="text", id="description", name="description", autocomplete='description')
+                    .form-group
+                      label(for="description") Tiện nghi 
+                      input.form-control(type="text", id="convenient", name="convenient", placeholder="Hướng phòng , lược , máy sấy, tủ quần áo,... ")
+                    .form-group
+                      label(for="description") Không gian
+                      .form-group(style="display: flex;")
+                        input.form-control(type="Number", id="area", name="area", placeholder="Diện tích")  
+                        input.form-control(type="number",id="amount_bed",name="amount_bed",placeholder="Số giường ")
+                    .form-group
+                      label(for="welcome_url") Giá
+                      input.form-control(type="Number", id="price", name="price", autocomplete='welcome_url')
+                    .form-group
+                        <label for="exampleInputFile">Upload</label>
+                        <input type="file" id="welcome" name="room">
+                        <p class="help-block">Kích thước ảnh: 720 x 959</p>
+                        img(src="",class="img-responsive hidden",id="img",style="width: 400px;height: 300px;", alt="")
+                  .box-footer
+                    button.btn.btn-primary(type="submit")
+                      i.fa.fa-save.p-r-5
+                      | Submit    
+            .col-md-6
+              .box.box-success
+                .box-header.with-border
+                  h3.box-title Loại phòng
+                .box-body.table-responsive.no-padding
+                    <table class="table table-hover ">
+                     <thead>
+                      <tr>
+                        <th>Loại phòng</th>
+                        //- <th>Dịch vụ</th>
+                        //- <th>Mô tả</th>
+                        <th>Số giường ngủ</th>
+                        <th>Ảnh</th>
+                        <th></th>
+                      </tr>
+                      </thead> 
+                      <tbody>
+                      - var i=0
+                    if typeof(data.room)!= "undefined"
+                      each item in data.room     
+                          tr
+                            td= item.type
+                            //- td= item.convenient
+                            //- td= item.description                           
+                            td= item.amount_bed 
+                            td
+                              img(class="img-thumbnail" ,style="width: 50px;height: 50px;", src=item.image)
+                            td 
+                              button(class='btn btn-success' onclick="editTitle("+i+")") 
+                               <i class="fa fa-pencil"></i>
+                              button(class='btn btn-danger' onclick="deleteRoom("+i+")" ) 
+                                <i class="fa fa-trash"></i>
+                              - i++;
+                    <tbody>        
+                    </table>
+
+                form(action='/pages/room/delete',class="visible", method='POST',id="senddata2")
+                  input(type='hidden', name='_csrf', value=_csrf)
+                  input(type='hidden', name='id',id="imgurl2")
+                script(type='text/javascript').
+                      function deleteRoom(id){
+                        $('#imgurl2').val(id);
+                        $( "#senddata2" ).submit();
+                          };        
+                      function editTitle(id){
+                        var arr=[#{data.room}] ;
+                        $('#type').val(arr[id]['type']);
+                        $('#description').val(arr[id]['description']);
+                        $('#convenient').val(arr[id]['convenient']);
+                        $('#area').val(arr[id]['area']);
+                        $('#amount_bed').val(arr[id]['amount_bed']);
+                        $('#price').val(arr[id]['price']);
+                        $('#img').attr("src", arr[id]['image']);
+                        $('#img').removeClass( "hidden" );
+                        $('#link').val(arr[id]['image']); 
+                        $('#link1').val(id);    
+                    };       

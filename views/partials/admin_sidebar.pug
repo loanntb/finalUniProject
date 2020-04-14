@@ -1,0 +1,83 @@
+aside.main-sidebar
+  section.sidebar
+    //- .user-panel
+    //-   .pull-left.image
+    //-     img.img-circle(src="/images/avatar-372-456324.png", alt="User Image")
+    //-   .pull-left.info
+    //-     p Khách sạn sao xanh
+    ul.sidebar-menu(data-widget="tree")
+      li.header MAIN NAVIGATION 
+      li.active
+        a(href="/account")
+          i.fa.fa-user
+          span Hồ sơ
+      if user.role!=""    
+        li.treeview
+          a(href="#")
+            i.fa.fa-book
+            span Trang
+            span.pull-right-container
+              i.fa.fa-angle-left.pull-right
+          ul.treeview-menu
+            li
+              a(href="/pages/home")
+                i.fa.fa-circle-o.text-red
+                | Trang chủ
+            li
+              a(href="/pages/room")
+                i.fa.fa-circle-o.text-red
+                | Phòng 
+            li
+              a(href="/pages/menu")
+                i.fa.fa-circle-o.text-red
+                | Thực đơn  
+            li
+              a(href="/pages/cafe")
+                i.fa.fa-circle-o.text-red
+                | Cà phê sách     
+            li
+              a(href="/pages/contact")
+                i.fa.fa-circle-o.text-red
+                | Liên hệ  
+            li
+              a(href="/pages/tuyendung")
+                i.fa.fa-circle-o.text-red
+                | Tuyển dụng               
+        li.treeview
+          a(href="#")
+            i.fa.fa-book
+            span Oder
+            span.pull-right-container
+              i.fa.fa-angle-left.pull-right
+          ul.treeview-menu
+            li
+              a(href="/pages/book/room")
+                i.fa.fa-circle-o.text-red
+                | Phòng
+            li
+              a(href="/pages/book/table")
+                i.fa.fa-circle-o.text-red
+                | Bàn 
+        if user.role !='Manager'  
+          li.treeview
+            a(href="#")
+              i.fa.fa-book
+              span Quản lý
+              span.pull-right-container
+                i.fa.fa-angle-left.pull-right
+            ul.treeview-menu
+              li
+                a(href="/pages/account")
+                  i.fa.fa-circle-o.text-red
+                  | Tài khoản
+              li
+                a(href="/pages/email")
+                  i.fa.fa-circle-o.text-red
+                  | Email                  
+      li
+        a(href="/logout")
+          i.fa.fa-sign-out
+          span Đăng xuất
+      
+          
+                  

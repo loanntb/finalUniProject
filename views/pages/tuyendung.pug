@@ -1,0 +1,100 @@
+extends ../admin_layout
+block content
+  section.content-header
+    h1  Thông tin && tuyển dụng
+    ol.breadcrumb
+      li
+        a(href="/")
+          i.fa.fa-dashboard
+          | Home
+      li.active Tuyển dụng
+
+  section.content
+    .row
+      .col-md-6
+        .box.box-primary
+          .box-header.with-border
+            h3.box-title Ảnh trang tuyển dụng
+          form(action='/pages/tuyendung/slide', method='POST', enctype='multipart/form-data')
+            input(type='hidden', name='_csrf', value=_csrf)
+            input(type='hidden',id="link", name='img')
+            input(type='hidden',id="link1", name='id')
+            .box-body
+              .form-group
+                label(for="sub_title") Tiêu đề phụ
+                input.form-control(type="text", id="sub_title", name="sub_title", autocomplete='sub_title')
+              .form-group
+                label(for="title") Tiêu đề
+                input.form-control(type="text", id="title", name="title", autocomplete='title')
+              .form-group
+                  <label for="exampleInputFile">Upload</label>
+                  <input type="file" id="slide" name="slide">
+                  <p class="help-block">Kích thước ảnh: 1900 x 925</p>
+                  img(src="",class="img-responsive hidden",id="img",style="width: 400px;height: 300px;",name="img", alt="")
+            .box-footer
+              button.btn.btn-primary(type="submit")
+                i.fa.fa-save.p-r-5
+                | Submit    
+      .col-md-6
+        .box.box-primary
+          .box-header.with-border
+            h3.box-title Danh sách ảnh
+          .box-body.table-responsive.no-padding
+              <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Tiêu đề</th>
+                  <th>Ảnh</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>  
+                 - var i=0
+              if typeof(data.slides)!= "undefined"      
+                each item in data.slides     
+                    tr
+                      td= item.title
+                      td
+                        img(class="img-thumbnail" ,style="width: 50px;height: 50px;", src=item.image_url)
+                      td 
+                        button(class='btn btn-success' onclick="editTitle("+i+")") 
+                          <i class="fa fa-pencil"></i>
+                        button(class='btn btn-danger' onclick="deleteTitle("+i+")" ) 
+                          <i class="fa fa-trash"></i>
+                        - i++;
+              </tbody>        
+              </table>
+
+          form(action='/pages/tuyendung/slide/delete',class="visible", method='POST',id="senddata")
+            input(type='hidden', name='_csrf', value=_csrf)
+            input(type='hidden', name='id',id="imgurl")
+          script(type='text/javascript').
+                function deleteTitle(id){
+                  $('#imgurl').val(id);
+                   $( "#senddata" ).submit();
+                    };
+                function editTitle(id){ 
+                        var arr=[#{data.slides}] ;
+                        $('#sub_title').val(arr[id]['sub_title']);
+                        $('#title').val(arr[id]['title']);
+                        $('#sub_title').val(arr[id]['sub_title']);
+                        $('#img').attr("src", arr[id]['image_url']);
+                        $('#img').removeClass( "hidden" );
+                        $('#link').val(arr[id]['image_url']); 
+                        $('#link1').val(id);    
+                    };         
+    .row 
+    .col-md-12       
+          .box.box-info
+            .box-header.with-border
+              h3.box-title Thông tin tuyển dụng 
+            | Cập nhật lúc : #{data.info.update_at}
+            form(action='/pages/tuyendung/info', method='POST')
+              input(type='hidden', name='_csrf', value=_csrf)
+              .box-body
+                .form-group
+                  textarea.form-control(type="text", id="description", name="description", autocomplete='description')=data.info.description
+              .box-footer
+                button.btn.btn-primary(type="submit")
+                  i.fa.fa-save.p-r-5
+                  | Submit

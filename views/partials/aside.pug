@@ -1,0 +1,23 @@
+aside.sidebar.trans-0-4
+  button.btn-hide-sidebar.ti-close.color0-hov.trans-0-4
+  ul.menu-sidebar.p-t-95.p-b-70
+    li.t-center.m-b-13
+      a.txt19(href='/') Trang chủ
+    li.t-center.m-b-13
+      a.txt19(href='/menu') Thực đơn
+    li.t-center.m-b-13
+      a.txt19(href='/room') Phòng  
+    li.t-center.m-b-13
+      a.txt19(href='/cafe') Cà phê 
+    li.t-center.m-b-13
+      a.txt19(href='/contact') Liên hệ
+    li.t-center.m-b-13
+      a.txt19(href='/tuyendung') Tuyển dụng  
+    if !user
+      li.t-center
+        a.btn3.flex-c-m.size13.txt11.trans-0-4.m-l-r-auto(href='/login') Đăng nhập
+    else
+      li.t-center
+        a.btn3.flex-c-m.size13.txt11.trans-0-4.m-l-r-auto(href='/account') My Account  
+      li.t-center.m-b-13
+        a.txt19(href='/logout') Đăng xuất  

@@ -1,0 +1,59 @@
+extends ../admin_layout
+block content
+  section.content-header
+    h1 Danh sách đặt phòng
+    ol.breadcrumb
+      li
+        a(href="/")
+          i.fa.fa-dashboard
+          | Home
+      li.active Trang chủ
+
+  section.content             
+    .row 
+      .col-md-12       
+          .box.box-info
+            .box-body.table-responsive.no-padding
+                    <table class="table table-hover ">
+                     
+                      <tr>
+                        <th>Ngày tới </th>
+                        <th>Ngày đi</th>
+                        <th>Loại</th>
+                        <th>Số người</th>
+                        <th>Điện thoại</th>
+                        <th>Email</th>
+                        <th></th>
+                      </tr>
+                      if typeof(data.book)!= "undefined" 
+                        - var i=0 
+                        each item in data.book    
+                            tr
+                              td= item.checkin
+                              td= item.checkout
+                              td= item.room_type
+                              td= item.people
+                              td= item.phone
+                              td= item.email
+                              td
+                                button(class='btn btn-danger' onclick="deleteRoom("+i+")" ) 
+                                  <i class="fa fa-trash"></i>
+                                - i++;
+                      else
+                            tr 
+                              .alert.alert-warning
+                                  strong Warning!
+                                  |  Not have data. 
+                    </table>      
+                    form(action='/pages/book/room/delete',class="visible", method='POST',id="senddata2")
+                      input(type='hidden', name='_csrf', value=_csrf)
+                      input(type='hidden', name='id',id="imgurl2")
+                      input(type='hidden', name='page_number',value=page_number?page_number:0)
+                    script(type='text/javascript').
+                          function deleteRoom(id){
+                            $('#imgurl2').val(id);
+                            $( "#senddata2" ).submit();
+                              };
+            .dataTables_info(role='status', aria-live='polite') Showing #{parseInt(page_number)*10+ data.book.length==0?0:1} to #{parseInt(page_number)*10+data.book.length} of #{count} entries            
+            if count > 1
+              include admin_pagination                   

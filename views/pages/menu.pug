@@ -1,0 +1,123 @@
+extends ../admin_layout
+block content
+  section.content-header
+    h1 Thực đơn
+    ol.breadcrumb
+      li
+        a(href="/")
+          i.fa.fa-dashboard
+          | Home
+      li.active Trang chủ
+
+  section.content         
+    .row
+            .col-md-6
+              .box.box-success
+                .box-header.with-border
+                  h3.box-title Thêm thực đơn 
+                form(action='/pages/menu', method='POST')
+                  input(type='hidden', name='_csrf', value=_csrf)
+                  input(type='hidden',id="link1", name='id')
+                  .box-body
+                    .form-group
+                      label Danh mục
+                      select.form-control(,id="type",name="type")
+                        option(value="drink") Đồ uống
+                        option(value="food") Món ăn
+                    .form-group
+                      label(for="description") Tên 
+                      input.form-control(type="text", id="name", name="name", autocomplete='description')
+                    .form-group
+                      label(for="description") Mô tả 
+                      input.form-control(type="text", id="description", name="description", placeholder="Màu sắc, hương vị,... ")
+                    .form-group
+                      label(for="description") Giá
+                      input.form-control(type="Number", id="price", name="price", placeholder="Giá món")   
+                  .box-footer
+                    button.btn.btn-primary(type="submit")
+                      i.fa.fa-save.p-r-5
+                      | Submit 
+                          
+            .col-md-6
+              .box.box-success
+                .box-header.with-border
+                  h3.box-title Đồ uống
+                .box-body.table-responsive.no-padding
+                    <table class="table table-hover ">
+                     <thead> 
+                      <tr>
+                        <th>Tên</th>
+                          //<th>Description</th>
+                        <th>Giá</th>
+                        <th></th>
+                      </tr>
+                      </thead> 
+                      <tbody>  
+                      - var i=0
+                    if typeof(data.drink)!= "undefined"    
+                      each item in data.drink  
+                          tr
+                            td= item.name
+                            //- td= item.description
+                            td= item.price
+                            td 
+                              button(class='btn btn-success' onclick="edit("+i+",'drink')") 
+                               <i class="fa fa-pencil"></i>
+                              button(class='btn btn-danger' onclick="deletemenu("+i+",'drink')" ) 
+                                <i class="fa fa-trash"></i>
+                          - i++;
+                    </tbody>      
+                    </table> 
+                .box.box-success(style="margin-top: 90px;")                                                                                                   
+                .box-header.with-border
+                  h3.box-title Món ăn
+                .box-body.table-responsive.no-padding
+                    <table class="table table-hover ">
+                     <thead> 
+                      <tr>
+                        <th>Tên</th>
+                          // <th>Description</th>
+                        <th>Giá</th>
+                        <th></th>
+                      </tr>
+                    </thead>   
+                    <tbody>  
+                      - var i=0
+                    if typeof(data.food)!= "undefined"
+                      each item in data.food  
+                        
+                          tr
+                            td= item.name
+                            //- td= item.description
+                            td= item.price
+                            td 
+                              button(class='btn btn-success' onclick="edit("+i+",'food')") 
+                               <i class="fa fa-pencil"></i>
+                              button(class='btn btn-danger' onclick="deletemenu("+i+",'food')" ) 
+                                <i class="fa fa-trash"></i>
+                              - i++;
+                    </tbody>        
+                    </table>
+                    form(action='/pages/menu/delete',class="visible", method='POST',id="senddata")
+                      input(type='hidden', name='_csrf', value=_csrf)
+                      input(type='hidden', name='id',id="imgurl")
+                      input(type='hidden', name='type',id="type1")
+                    script(type='text/javascript').
+                          function deletemenu(id,type){
+                      $('#imgurl').val(id);
+                      $('#type1').val(type);
+                      $( "#senddata" ).submit();
+                        }; 
+                         function edit(id,type){
+                          var arr=[] ;
+                          if(type=="food"){
+                            arr=[#{data.food}];
+                          }else{
+                            arr=[#{data.drink}];
+                          } 
+                        $('#type').val(type);
+                        $('#description').val(arr[id]['description']);
+                        $('#price').val(arr[id]['price']);
+                        $('#name').val(arr[id]['name']);
+                        $('#link1').val(id);    
+                         };   
