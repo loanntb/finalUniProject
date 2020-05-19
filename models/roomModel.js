@@ -1,10 +1,15 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const ObjectId = require('mongodb').ObjectID;
 // const Schema = mongoose.Schema;
 // https://stackoverflow.com/questions/14453864/use-more-than-one-schema-per-collection-on-mongodb
 // Query normally and you get result of specific schema you are querying:
 // mongoose.model('CoordinateModel').find({}).then((a)=>console.log(a));
 
 const roomSchema = new mongoose.Schema({
+  _id: ObjectId,
+  name: {type: String, index: true},
+  floor: String,
   type:String,
   convenient: String,
   description:String,
@@ -12,8 +17,9 @@ const roomSchema = new mongoose.Schema({
   amount_bed:String,
   price: String,
   image:String,
-}, { _id: false });
+}, { _id: true });
 const roombookSchema = new mongoose.Schema({
+  _bookingId: ObjectId,
   checkin:String,
   checkout: String,
   room_type:String,
@@ -21,7 +27,8 @@ const roombookSchema = new mongoose.Schema({
   phone:String,
   email:String,
   identity_card:String,
-}, { _id: false });
+  roomID: {type: Schema.ObjectId, ref: "roomModel"}
+}, { _bookingId: true });
 
 const RoomModel = mongoose.model('roomModel', roomSchema);
 const RoomBookModel = mongoose.model('RoomBookModel', roombookSchema);

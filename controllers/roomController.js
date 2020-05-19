@@ -36,9 +36,6 @@ exports.homepage = (req, res) => {
 
 };
 exports.getbook = (req, res) => {
-  // var perPage = 10
-  //   , page = req.param('page') > 0 ? req.param('page') : 0
-
   HomeRoomModel.findOne({ __type: 'Room' }, (err, data) => {
     if (err) { return next(err); }
     if (!data) {
@@ -70,6 +67,8 @@ exports.postHomeRoom = (req, res, next) => {
     img = '/uploads/' + req.file.filename;
   }
   const roomModel = new RoomModel({
+    name: req.body.name ,
+    floor: req.body.floor,
     type: req.body.type,
     convenient: req.body.convenient,
     description: req.body.description,
@@ -134,7 +133,6 @@ exports.postBookRoom = (req, res, next) => {
     book: [roomModel]
   }
   );
-  // 
 
   ContactModel.findOne({ __type: 'contact' }, (err, data) => {
     email = data.email;

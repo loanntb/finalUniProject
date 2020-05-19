@@ -21,11 +21,17 @@ block content
                   input(type='hidden',id="link1", name='id')
                   .box-body
                     .form-group
+                      label(for="description") Tên phòng 
+                      input.form-control(type="text", id="name", name="name", autocomplete='tên phòng')
+                    .form-group
+                      label(for="description") Tầng 
+                      input.form-control(type="text", id="floor", name="floor", autocomplete='description')
+                    .form-group
                       label(for="description") Loại phòng 
-                      input.form-control(type="text", id="type", name="type", autocomplete='description')
+                      input.form-control(type="text", id="type", name="type", autocomplete='loại phòng')
                       .form-group
                       label(for="description") Mô tả chung 
-                      input.form-control(type="text", id="description", name="description", autocomplete='description')
+                      input.form-control(type="text", id="description", name="description", autocomplete='Mô tả chung')
                     .form-group
                       label(for="description") Tiện nghi 
                       input.form-control(type="text", id="convenient", name="convenient", placeholder="Hướng phòng , lược , máy sấy, tủ quần áo,... ")

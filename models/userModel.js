@@ -7,15 +7,8 @@ const userSchema = new mongoose.Schema({
   password: String,
   passwordResetToken: String,
   passwordResetExpires: Date,
-
-  // snapchat: String,
   facebook: String,
-  // twitter: String,
   google: String,
-  // github: String,
-  // instagram: String,
-  // linkedin: String,
-  // steam: String,
   tokens: Array,
   role:String,
   profile: {
@@ -23,9 +16,6 @@ const userSchema = new mongoose.Schema({
     phone: String,
     start_time:String,
     finish_time: String
-    // location: String,
-    // website: String,
-    // picture: String
   }
 }, { timestamps: true });
 
