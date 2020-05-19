@@ -125,6 +125,7 @@ exports.postBookRoom = (req, res, next) => {
     checkout: req.body.checkout,
     room_type: req.body.room_type,
     people: req.body.people,
+    identity_card: req.body.identity_card,
     phone: req.body.phone,
     email: req.body.email,
   });
@@ -142,8 +143,7 @@ exports.postBookRoom = (req, res, next) => {
       auth: {
         user: email.email,
         pass: email.password
-        // user: 'thamnguyen12985@gmail.com',// account test
-        // pass: 'tangthanh85'
+        
       }
     });
     const mailOptions = {
@@ -155,6 +155,7 @@ exports.postBookRoom = (req, res, next) => {
          Ngày đi :${req.body.checkout} \n
          Loại phòng:${req.body.room_type} \n
          Số người :${req.body.people} \n
+         CMTND :${req.body.identity_card} \n
          Số điện thoại :${req.body.phone} \n
          Email :${req.body.email} \n`
     };

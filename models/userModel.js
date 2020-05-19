@@ -21,6 +21,8 @@ const userSchema = new mongoose.Schema({
   profile: {
     name: String,
     phone: String,
+    start_time:String,
+    finish_time: String
     // location: String,
     // website: String,
     // picture: String

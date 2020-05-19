@@ -17,18 +17,20 @@ block content
                     <table class="table table-hover ">
                      
                       <tr>
+                        <th>CMND</th>
                         <th>Ngày tới </th>
                         <th>Ngày đi</th>
                         <th>Loại</th>
                         <th>Số người</th>
                         <th>Điện thoại</th>
                         <th>Email</th>
-                        <th></th>
+                        <th>Hành động</th>
                       </tr>
                       if typeof(data.book)!= "undefined" 
                         - var i=0 
                         each item in data.book    
                             tr
+                              td= item.identity_card
                               td= item.checkin
                               td= item.checkout
                               td= item.room_type
@@ -42,8 +44,8 @@ block content
                       else
                             tr 
                               .alert.alert-warning
-                                  strong Warning!
-                                  |  Not have data. 
+                                  strong Cảnh báo!
+                                  |  Không có dữ liệu. 
                     </table>      
                     form(action='/pages/book/room/delete',class="visible", method='POST',id="senddata2")
                       input(type='hidden', name='_csrf', value=_csrf)

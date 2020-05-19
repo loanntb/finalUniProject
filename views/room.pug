@@ -4,10 +4,10 @@ block content
   section.bg-title-page.flex-c-m.p-t-160.p-b-80.p-l-15.p-r-15(style='background-image: url(images/premier-room.jpg);')
     h2.tit6.t-center Hotel room
   section.bg1-pattern.p-t-120.p-b-105
-   if typeof(data.room)!= "undefined" 
+   if typeof(dataroom.room)!= "undefined" 
     .container
       // Delicious
-    each item,index in data.room
+    each item,index in dataroom.room
      if index %2 == 0   
       .row.p-t-170(id=index)
         .col-md-6.p-t-45.p-b-30
@@ -50,6 +50,9 @@ block content
         form.wrap-form-booking(action="/pages/book/room",method='POST')
           input(type='hidden', name='_csrf', value=_csrf)
           .d-inline-flex.p-2
+            span.txt6(style="padding-right: 15px;") CMTND
+                .wrap-inputdate.pos-relative.txt10.size12.bo2.bo-rad-10.m-t-3.m-b-23
+                  input.bo-rad-10.sizefull.txt10.p-l-20(type="text", name="identity_card")
             span.txt6(style="padding-right: 15px;") Ngày đến
                 .wrap-inputdate.pos-relative.txt10.size12.bo2.bo-rad-10.m-t-3.m-b-23
                   input.my-calendar.bo-rad-10.sizefull.txt10.p-l-20(type="text", name="checkin")
@@ -62,7 +65,7 @@ block content
             span.txt6(style="padding-right: 15px; width: 190px;") Loại phòng
                 .wrap-inputdate.pos-relative.txt10.size12.bo2.bo-rad-10.m-t-3.m-b-23
                   select.selection-1(name="room_type",id="type")
-                    each item in data.room  
+                    each item in dataroom.room  
                       option(value=item.type)=item.type   
             span.txt6(style="padding-right: 15px;") Số người lớn
                 .wrap-inputdate.pos-relative.txt10.size12.bo2.bo-rad-10.m-t-3.m-b-23
@@ -89,4 +92,3 @@ block content
                             function change(id){
                               $('#type').val(id).trigger('change'); 
                             };          
-          

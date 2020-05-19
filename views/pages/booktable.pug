@@ -24,7 +24,7 @@ block content
                           <th>Điện thoại</th>
                           <th>Email</th>
                           <th>Số người</th>
-                          <th></th>
+                          <th>Hành động</th>
                       </tr>  
                         if typeof(data.book)!= "undefined"      
                             - var i=0
@@ -43,8 +43,8 @@ block content
                         else
                               tr 
                                       .alert.alert-warning
-                                          strong Warning!
-                                          |  Not have data.        
+                                          strong  Cảnh báo!
+                                          |  Không có dữ liệu.        
                     </table>
                     form(action='/pages/book/table/delete',class="visible", method='POST',id="senddata2")
                       input(type='hidden', name='_csrf', value=_csrf)

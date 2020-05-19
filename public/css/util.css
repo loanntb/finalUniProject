@@ -2973,11 +2973,12 @@ TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
 .tit3 {
 	font-family: Poppins;
 	font-weight: 700;
-	font-size: 50px;
+	font-size: 45px;
 	line-height: 1.2;
 	color: #222222;
 	text-transform: uppercase;
 	letter-spacing: 6px;
+	margin-top: 38px;
 }
 
 .tit4 {

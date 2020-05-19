@@ -27,7 +27,7 @@ html
   head
     meta(charset="utf-8")
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    title #{title}-Khách Sạn Sao Xanh
+    title #{title}-Quản lý khách Sạn 
     link(rel='stylesheet', href='/admin/vendor/bootstrap/bootstrap.min.css')
     link(rel='stylesheet', href='/fonts/font-awesome-4.7.0/css/font-awesome.min.css')
     link(rel='stylesheet', href='/admin/css/AdminLTE.min.css')
@@ -37,7 +37,7 @@ html
   body.hold-transition.register-page
     .register-box
       .register-logo
-        a(href="/") Khách Sạn Sao Xanh
+        a(href="/") Quản lý khách sạn
       .register-box-body
         p.login-box-msg Tạo mới tài khoản
         include ../partials/flash
@@ -57,13 +57,13 @@ html
               button.btn.btn-primary.btn-block.btn-flat(type="submit") Đăng kí
 
         .social-auth-links.text-center
-          p - OR
+          p - Hoặc
           a.btn.btn-block.btn-social.btn-facebook.btn-flat(href="#")
             i.fa.fa-facebook
-            | Sign in using Facebook
+            | Đăng ký bằng Facebook
           a.btn.btn-block.btn-social.btn-google.btn-flat(href="#")
             i.fa.fa-google-plus
-            | Sign in using Google
+            | Đăng ký bằng Google
 
         a(href="/login") Bạn đã có tài khoản
 

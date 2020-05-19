@@ -3,7 +3,7 @@ extends layout
 block content
   section.bg-title-page.flex-c-m.p-t-160.p-b-80.p-l-15.p-r-15(style='background-image: url(images/bg-cover-video-02.jpg);')
   h3.tit3.t-center.m-b-35.m-t-5
-    | Coffee Him
+    | Coffee
   pre.t-center.m-l-r-auto(style="padding: 0 20% 0 20%") !{data.info.description}  
   .single-item.container-fluid(style="margin-top:40px;")
       if typeof(data.slides)!= "undefined" 
@@ -12,14 +12,14 @@ block content
                 img.img-thumbnail(src=item.image, style="width:auto;min-height:400px")
                 .overlay-item-gallery.trans-0-4.flex-c-m
                   a.btn-show-gallery.flex-c-m.fa.fa-search(href=item.image, data-lightbox='gallery')     
-  .row.p-t-135
+  .row
       .col-sm-8.col-md-4.col-lg-4.m-l-r-auto.p-t-30.p-b-40
         .dis-flex.m-l-23
           .p-r-40.p-t-6
             img(src='images/icons/map-icon.png', alt='IMG-ICON')
           .flex-col-l
             span.txt5.p-b-10
-              | Location
+              | Vị trí
             span.txt23.size38
               | #{data.info.address}
       .col-sm-8.col-md-3.col-lg-4.m-l-r-auto.p-t-30
@@ -28,7 +28,7 @@ block content
             img(src='images/icons/phone-icon.png', alt='IMG-ICON')
           .flex-col-l
             span.txt5.p-b-10
-              | Call Us
+              | Đường dây nóng
             span.txt23.size38
               | #{data.info.phone}
 

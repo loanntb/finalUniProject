@@ -10,7 +10,7 @@ const roomSchema = new mongoose.Schema({
   description:String,
   area: String,
   amount_bed:String,
-  price: Number,
+  price: String,
   image:String,
 }, { _id: false });
 const roombookSchema = new mongoose.Schema({
@@ -20,6 +20,7 @@ const roombookSchema = new mongoose.Schema({
   people: String,
   phone:String,
   email:String,
+  identity_card:String,
 }, { _id: false });
 
 const RoomModel = mongoose.model('roomModel', roomSchema);
