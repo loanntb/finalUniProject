@@ -4,9 +4,9 @@ aside.main-sidebar
     //-   .pull-left.image
     //-     img.img-circle(src="/images/avatar-372-456324.png", alt="User Image")
     //-   .pull-left.info
-    //-     p Khách sạn sao xanh
+    //-     p Quản Lý Khách Sạn
     ul.sidebar-menu(data-widget="tree")
-      li.header MAIN NAVIGATION 
+      li.header Danh mục 
       li.active
         a(href="/account")
           i.fa.fa-user
@@ -34,7 +34,7 @@ aside.main-sidebar
             li
               a(href="/pages/cafe")
                 i.fa.fa-circle-o.text-red
-                | Cà phê sách     
+                | Cà phê      
             li
               a(href="/pages/contact")
                 i.fa.fa-circle-o.text-red
@@ -46,7 +46,7 @@ aside.main-sidebar
         li.treeview
           a(href="#")
             i.fa.fa-book
-            span Oder
+            span Đặt
             span.pull-right-container
               i.fa.fa-angle-left.pull-right
           ul.treeview-menu
@@ -57,8 +57,24 @@ aside.main-sidebar
             li
               a(href="/pages/book/table")
                 i.fa.fa-circle-o.text-red
-                | Bàn 
-        if user.role !='Manager'  
+                | Bàn
+        li.treeview
+          a(href="#")
+            i.fa.fa-book
+            span Báo cáo
+            span.pull-right-container
+              i.fa.fa-angle-left.pull-right
+          ul.treeview-menu
+            li
+              a(href="/pages/statistical")
+                i.fa.fa-circle-o.text-red
+                | Thống Kê
+            li
+              a(href="/pages/book/table")
+                i.fa.fa-circle-o.text-red
+                | Doanh Thu
+        if user.role !='Receptionist'
+
           li.treeview
             a(href="#")
               i.fa.fa-book

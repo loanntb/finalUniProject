@@ -1,5 +1,9 @@
 /*------------------------------------------------------------------
-Project:  QLKS
+Project:  Pato
+Version:  
+Last change:  
+Assigned to:  Kevin Nguyen
+Primary use:  Company
 -------------------------------------------------------------------*/
 
 /*------------------------------------------------------------------
@@ -139,6 +143,7 @@ p {
 ul, li {
   margin: 0px;
   list-style-type: none;
+  text-transform: capitalize;
 }
 
 /* ------------------------------------ */
@@ -1661,6 +1666,4 @@ body {
   color: white !important
 }
 
-img.img-thumbnail {
-  height: 400px !important;
-}
+

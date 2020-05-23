@@ -24,8 +24,8 @@ exports.getLogin = (req, res) => {
  * Sign in using email and password.
  */
 exports.postLogin = (req, res, next) => {
-  req.assert('email', 'Email is not valid').isEmail();
-  req.assert('password', 'Password cannot be blank').notEmpty();
+  req.assert('email', 'Email không hợp lệ').isEmail();
+  req.assert('password', 'Mật khẩu không thể để trống').notEmpty();
   req.sanitize('email').normalizeEmail({ gmail_remove_dots: false });
 
   const errors = req.validationErrors();
@@ -43,7 +43,7 @@ exports.postLogin = (req, res, next) => {
     }
     req.logIn(user, (err) => {
       if (err) { return next(err); }
-      req.flash('success', { msg: 'Success! You are logged in.' });
+      req.flash('success', { msg: 'Bạn đã đăng nhập thành công!' });
       res.redirect(req.session.returnTo || '/');
     });
   })(req, res, next);
@@ -80,9 +80,9 @@ exports.getSignup = (req, res) => {
  * Create a new local account.
  */
 exports.postSignup = (req, res, next) => {
-  req.assert('email', 'Email is not valid').isEmail();
-  req.assert('password', 'Password must be at least 4 characters long').len(4);
-  req.assert('confirmPassword', 'Passwords do not match').equals(req.body.password);
+  req.assert('email', 'Email không hợp lệ').isEmail();
+  req.assert('password', 'Mật khẩu phải dài ít nhất 4 ký tự').len(4);
+  req.assert('confirmPassword', 'Mật khẩu không khớp').equals(req.body.password);
   req.sanitize('email').normalizeEmail({ gmail_remove_dots: false });
 
   const errors = req.validationErrors();
@@ -100,17 +100,17 @@ exports.postSignup = (req, res, next) => {
   // console.log(checkFirstSignup());
   // if(this.checkFirstSignup()){
   //   console.log(this.checkFirstSignup());
-  //   user.role="ADMIN";
+  //   user.role="Admin";
   // }
   User.findOne({}, (err, data) => {
     if (!data) {
-      user.role = "ADMIN";
+      user.role = "Admin";
     }
   });
   User.findOne({ email: req.body.email }, (err, existingUser) => {
     if (err) { return next(err); }
     if (existingUser) {
-      req.flash('errors', { msg: 'Account with that email address already exists.' });
+      req.flash('errors', { msg: 'Tài khoản với địa chỉ email này đã tồn tại.' });
       return res.redirect('/signup');
     }
     user.save((err) => {
@@ -153,11 +153,9 @@ exports.getListAccount = (req, res) => {
  * Update profile information.
  */
 exports.postUpdateProfile = (req, res, next) => {
-  req.assert('email', 'Please enter a valid email address.').isEmail();
+  req.assert('email', 'Vui lòng nhập một địa chỉ email hợp lệ.').isEmail();
   req.sanitize('email').normalizeEmail({ gmail_remove_dots: false });
-
   const errors = req.validationErrors();
-
   if (errors) {
     req.flash('errors', errors);
     return res.redirect('/account');
@@ -173,12 +171,12 @@ exports.postUpdateProfile = (req, res, next) => {
     user.save((err) => {
       if (err) {
         if (err.code === 11000) {
-          req.flash('errors', { msg: 'The email address you have entered is already associated with an account.' });
+          req.flash('errors', { msg: 'Địa chỉ email bạn đã nhập đã được liên kết với một tài khoản.' });
           return res.redirect('/account');
         }
         return next(err);
       }
-      req.flash('success', { msg: 'Profile information has been updated.' });
+      req.flash('success', { msg: 'Thông tin hồ sơ của bạn đã được cập nhật.' });
       res.redirect('/account');
     });
   });
@@ -189,8 +187,8 @@ exports.postUpdateProfile = (req, res, next) => {
  * Update current password.
  */
 exports.postUpdatePassword = (req, res, next) => {
-  req.assert('password', 'Password must be at least 4 characters long').len(4);
-  req.assert('confirmPassword', 'Passwords do not match').equals(req.body.password);
+  req.assert('password', 'Mật khẩu phải dài ít nhất 4 ký tự').len(4);
+  req.assert('confirmPassword', 'Mật khẩu không khớp').equals(req.body.password);
 
   const errors = req.validationErrors();
 
@@ -204,7 +202,7 @@ exports.postUpdatePassword = (req, res, next) => {
     user.password = req.body.password;
     user.save((err) => {
       if (err) { return next(err); }
-      req.flash('success', { msg: 'Password has been changed.' });
+      req.flash('success', { msg: 'Mật khẩu đã được thay đổi.' });
       res.redirect('/account');
     });
   });
@@ -217,7 +215,7 @@ exports.postUpdatePassword = (req, res, next) => {
 exports.postDeleteAccount = (req, res, next) => {
   User.deleteOne({ _id: req.body.id }, (err) => {
     if (err) { return next(err); }
-    req.flash('info', { msg: 'Account ' + req.body.email + ' has been deleted.' });
+    req.flash('info', { msg: 'Account ' + req.body.email + ' đã bị xóa.' });
     res.redirect('/pages/account');
   });
 };
@@ -243,15 +241,15 @@ exports.getOauthUnlink = (req, res, next) => {
       && tokensWithoutProviderToUnlink.length === 0
     ) {
       req.flash('errors', {
-        msg: `The ${titleCaseProvider} account cannot be unlinked without another form of login enabled.`
-          + ' Please link another account or add an email address and password.'
+        msg: ` ${titleCaseProvider} Tài khoản này không thể được hủy liên kết mà không có hình thức đăng nhập khác được kích hoạt.`
+          + ' Vui lòng liên kết tài khoản khác hoặc thêm địa chỉ email và mật khẩu.'
       });
       return res.redirect('/account');
     }
     user.tokens = tokensWithoutProviderToUnlink;
     user.save((err) => {
       if (err) { return next(err); }
-      req.flash('info', { msg: `${titleCaseProvider} account has been unlinked.` });
+      req.flash('info', { msg: `${titleCaseProvider} tài khoản đã được hủy liên kết.` });
       res.redirect('/account');
     });
   });
@@ -271,7 +269,7 @@ exports.getReset = (req, res, next) => {
     .exec((err, user) => {
       if (err) { return next(err); }
       if (!user) {
-        req.flash('errors', { msg: 'Password reset token is invalid or has expired.' });
+        req.flash('errors', { msg: 'Mã thông báo đặt lại mật khẩu không hợp lệ hoặc đã hết hạn.' });
         return res.redirect('/forgot');
       }
       res.render('account/reset', {
@@ -286,8 +284,8 @@ exports.getReset = (req, res, next) => {
  * Process the reset password request.
  */
 exports.postReset = (req, res, next) => {
-  req.assert('password', 'Password must be at least 4 characters long.').len(4);
-  req.assert('confirm', 'Passwords must match.').equals(req.body.password);
+  req.assert('password', 'Mật khẩu phải dài ít nhất 4 ký tự.').len(4);
+  req.assert('confirm', 'Mật khẩu không khớp.').equals(req.body.password);
 
   const errors = req.validationErrors();
 
@@ -302,7 +300,7 @@ exports.postReset = (req, res, next) => {
       .where('passwordResetExpires').gt(Date.now())
       .then((user) => {
         if (!user) {
-          req.flash('errors', { msg: 'Password reset token is invalid or has expired.' });
+          req.flash('errors', { msg: 'Mã thông báo đặt lại mật khẩu không hợp lệ hoặc đã hết hạn.' });
           return res.redirect('back');
         }
         user.password = req.body.password;
@@ -328,12 +326,12 @@ exports.postReset = (req, res, next) => {
     const mailOptions = {
       to: user.email,
       from: process.env.SENDGRID_USER,
-      subject: 'Your account in Khách Sạn Sao Xanh password has been changed',
-      text: `Hello,\n\nThis is a confirmation that the password for your account ${user.email} has just been changed.\n`
+      subject: 'Tài khoản của bạn trong mật khẩu hệ thống quản lý khách sạn đã được thay đổi',
+      text: `Chào bạn,\n\nĐây là một xác nhận rằng mật khẩu cho tài khoản của bạn ${user.email} vừa được thay đổi.\n`
     };
     return transporter.sendMail(mailOptions)
       .then(() => {
-        req.flash('success', { msg: 'Success! Your password has been changed.' });
+        req.flash('success', { msg: 'Thành công! Mật khẩu của bạn đã được thay đổi.' });
       })
       .catch((err) => {
         if (err.message === 'self signed certificate in certificate chain') {
@@ -350,11 +348,11 @@ exports.postReset = (req, res, next) => {
           });
           return transporter.sendMail(mailOptions)
             .then(() => {
-              req.flash('success', { msg: 'Success! Your password has been changed.' });
+              req.flash('success', { msg: 'Thành công! Mật khẩu của bạn đã được thay đổi.' });
             });
         }
         console.log('ERROR: Could not send password reset confirmation email after security downgrade.\n', err);
-        req.flash('warning', { msg: 'Your password has been changed, however we were unable to send you a confirmation email. We will be looking into it shortly.' });
+        req.flash('warning', { msg: 'Mật khẩu của bạn đã được thay đổi, tuy nhiên chúng tôi không thể gửi cho bạn email xác nhận. Chúng tôi sẽ xem xét nó trong thời gian ngắn.' });
         return err;
       });
   };
@@ -383,7 +381,7 @@ exports.getForgot = (req, res) => {
  * Create a random token, then the send user an email with a reset link.
  */
 exports.postForgot = (req, res, next) => {
-  req.assert('email', 'Please enter a valid email address.').isEmail();
+  req.assert('email', 'Vui lòng nhập một địa chỉ email hợp lệ.').isEmail();
   req.sanitize('email').normalizeEmail({ gmail_remove_dots: false });
 
   const errors = req.validationErrors();
@@ -400,7 +398,7 @@ exports.postForgot = (req, res, next) => {
       .findOne({ email: req.body.email })
       .then((user) => {
         if (!user) {
-          req.flash('errors', { msg: 'Account with that email address does not exist.' });
+          req.flash('errors', { msg: 'Tài khoản với địa chỉ email này không tồn tại.' });
         } else {
           user.passwordResetToken = token;
           user.passwordResetExpires = Date.now() + 3600000; // 1 hour
@@ -417,22 +415,21 @@ exports.postForgot = (req, res, next) => {
       auth: {
         user: process.env.SENDGRID_USER,
         pass: process.env.SENDGRID_PASSWORD
-        // user: 'thamnguyen12985@gmail.com',// account test
-        // pass: 'tangthanh85'
+        
       }
     });
     const mailOptions = {
       to: user.email,
-      from: 'hackathon@starter.com',//process.env.SENDGRID_USER
-      subject: 'Reset your password on Khách Sạn Xanh',
-      text: `You are receiving this email because you (or someone else) have requested the reset of the password for your account.\n\n
-        Please click on the following link, or paste this into your browser to complete the process:\n\n
+      from: 'qlks2020@gmail.com',//process.env.SENDGRID_USER
+      subject: 'Đặt lại mật khẩu của bạn trong hệ thống Quản Lý Khách sạn',
+      text: `Bạn nhận được email này vì bạn (hoặc người khác) đã yêu cầu đặt lại mật khẩu cho tài khoản của bạn.\n\n
+      Vui lòng nhấp vào liên kết sau hoặc dán liên kết này vào trình duyệt của bạn để hoàn tất quy trình:\n\n
         http://${req.headers.host}/reset/${token}\n\n
-        If you did not request this, please ignore this email and your password will remain unchanged.\n`
+        Nếu bạn không yêu cầu điều này, xin vui lòng bỏ qua email này và mật khẩu của bạn sẽ không thay đổi.\n`
     };
     return transporter.sendMail(mailOptions)
       .then(() => {
-        req.flash('info', { msg: `An e-mail has been sent to ${user.email} with further instructions.` });
+        req.flash('info', { msg: `Một email vừa được gửi tới ${user.email} với lời hướng dẫn cách thay đổi mật khẩu.` });
       })
       .catch((err) => {
         if (err.message === 'self signed certificate in certificate chain') {
@@ -449,11 +446,11 @@ exports.postForgot = (req, res, next) => {
           });
           return transporter.sendMail(mailOptions)
             .then(() => {
-              req.flash('info', { msg: `An e-mail has been sent to ${user.email} with further instructions.` });
+              req.flash('info', { msg: `Một email vừa được gửi tới ${user.email} với lời hướng dẫn cách thay đổi mật khẩu.` });
             });
         }
         console.log('ERROR: Could not send forgot password email after security downgrade.\n', err);
-        req.flash('errors', { msg: 'Error sending the password reset message. Please try again shortly.' });
+        req.flash('errors', { msg: 'Lỗi gửi tin nhắn đặt lại mật khẩu. Vui lòng thử lại trong thời gian ngắn.' });
         return err;
       });
   };
