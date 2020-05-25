@@ -1666,4 +1666,7 @@ body {
   color: white !important
 }
 
+.alert {
+  z-index: 9999 !important;
+}
 

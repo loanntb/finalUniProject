@@ -1,6 +1,6 @@
 const { promisify } = require('util');
 const crypto = require('crypto');
-//const nodemailer = require('npm');
+const nodemailer = require('nodemailer');
 const passport = require('passport');
 const User = require('../models/userModel');
 const toTitleCase = require('../utils/toTitleCase');
@@ -166,8 +166,6 @@ exports.postUpdateProfile = (req, res, next) => {
     user.email = req.body.email || '';
     user.profile.name = req.body.name || '';
     user.profile.phone = req.body.phone || '';
-    // user.profile.location = req.body.location || '';
-    // user.profile.website = req.body.website || '';
     user.save((err) => {
       if (err) {
         if (err.code === 11000) {
@@ -215,7 +213,7 @@ exports.postUpdatePassword = (req, res, next) => {
 exports.postDeleteAccount = (req, res, next) => {
   User.deleteOne({ _id: req.body.id }, (err) => {
     if (err) { return next(err); }
-    req.flash('info', { msg: 'Account ' + req.body.email + ' đã bị xóa.' });
+    req.flash('info', { msg: 'Tài khoản ' + req.body.email + ' đã bị xóa.' });
     res.redirect('/pages/account');
   });
 };
@@ -413,16 +411,15 @@ exports.postForgot = (req, res, next) => {
     let transporter = nodemailer.createTransport({
       service: 'Gmail',
       auth: {
-        user: process.env.SENDGRID_USER,
-        pass: process.env.SENDGRID_PASSWORD
-        
+        user: "qlks2020@gmail.com",
+        pass: "qLKS2020@"
       }
     });
     const mailOptions = {
       to: user.email,
       from: 'qlks2020@gmail.com',//process.env.SENDGRID_USER
       subject: 'Đặt lại mật khẩu của bạn trong hệ thống Quản Lý Khách sạn',
-      text: `Bạn nhận được email này vì bạn (hoặc người khác) đã yêu cầu đặt lại mật khẩu cho tài khoản của bạn.\n\n
+      text: `Chào bạn! \n Bạn nhận được email này vì bạn (hoặc người khác) đã yêu cầu đặt lại mật khẩu cho tài khoản của bạn.\n\n
       Vui lòng nhấp vào liên kết sau hoặc dán liên kết này vào trình duyệt của bạn để hoàn tất quy trình:\n\n
         http://${req.headers.host}/reset/${token}\n\n
         Nếu bạn không yêu cầu điều này, xin vui lòng bỏ qua email này và mật khẩu của bạn sẽ không thay đổi.\n`
@@ -437,8 +434,8 @@ exports.postForgot = (req, res, next) => {
           transporter = nodemailer.createTransport({
             service: 'SendGrid',
             auth: {
-              user: process.env.SENDGRID_USER,
-              pass: process.env.SENDGRID_PASSWORD
+              user: "qlks2020@gmail.com",
+              pass: "qLKS2020@"
             },
             tls: {
               rejectUnauthorized: false
@@ -449,6 +446,7 @@ exports.postForgot = (req, res, next) => {
               req.flash('info', { msg: `Một email vừa được gửi tới ${user.email} với lời hướng dẫn cách thay đổi mật khẩu.` });
             });
         }
+        console.log(transporter);
         console.log('ERROR: Could not send forgot password email after security downgrade.\n', err);
         req.flash('errors', { msg: 'Lỗi gửi tin nhắn đặt lại mật khẩu. Vui lòng thử lại trong thời gian ngắn.' });
         return err;
@@ -462,14 +460,13 @@ exports.postForgot = (req, res, next) => {
     .catch(next);
 };
 exports.postUpdateRole = (req, res, next) => {
-
   console.log(req.body);
   User.findById(req.body.id, (err, user) => {
     if (err) { return next(err); }
     user.role = req.body.role;
     user.save((err) => {
       if (err) { return next(err); }
-      req.flash('success', { msg: 'Role ' + user.email + ' is ' + req.body.role });
+      req.flash('success', { msg: 'Vai trò ' + user.email + ' là ' + req.body.role });
       res.redirect('/pages/account');
     });
   });

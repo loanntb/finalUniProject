@@ -2,6 +2,7 @@
 const { HomeRoomModel, RoomModel, RoomBookModel } = require('../models/roomModel');
 const nodemailer = require('nodemailer');
 const { ContactModel } = require('../models/contactModel');
+const moment = require('moment');
 /**
  * GET /
  * Home page.
@@ -58,8 +59,6 @@ exports.getbook = (req, res) => {
 };
 
 exports.postHomeRoom = (req, res, next) => {
-  console.log(req.body);
-  console.log(req.file);
   var img = "";
   if (req.body.img && !req.file) {
     img = req.body.img;
@@ -90,7 +89,6 @@ exports.postHomeRoom = (req, res, next) => {
       } else {
         data.room = [...data.room, ...homeRoomModel.room];
       }
-
       data.save((err) => {
         if (err) { return next(err); }
         res.redirect('/pages/room');
@@ -105,11 +103,14 @@ exports.postHomeRoom = (req, res, next) => {
 };
 exports.deleteHomeRoom = (req, res, next) => {
   HomeRoomModel.findOne({ __type: 'Room' }, (err, data) => {
-    if (err) { return next(err); }
+    if (err) { 
+      return next(err); 
+    }
     if (data) {
       data.room.splice(req.body.id, 1);
       data.save((err) => {
         if (err) { return next(err); }
+        req.flash('success', { msg: 'Xóa thành công' });
         res.redirect('/pages/room');
       });
     }
@@ -117,25 +118,50 @@ exports.deleteHomeRoom = (req, res, next) => {
 
 };
 exports.postBookRoom = (req, res, next) => {
-  console.log(req.body);
-  console.log(req.file);
+  let checkin = req.body.checkin;
+  let checkout = req.body.checkout;
+  let date1 = parseInt(checkin);
+  let date2 = parseInt(checkout);
+  var diffDays = Math.ceil((date2 - date1) / (1000 * 3600 * 24)); //gives day difference 
+  console.log(date1);
+  console.log(diffDays);
+  
   const roomModel = new RoomBookModel({
-    checkin: req.body.checkin,
-    checkout: req.body.checkout,
+    checkin: checkin,
+    checkout: checkout,
     room_type: req.body.room_type,
     people: req.body.people,
+    duration: diffDays,
     identity_card: req.body.identity_card,
     phone: req.body.phone,
     email: req.body.email,
+    roomId: req.body.name
   });
-
   const homeRoomModel = new HomeRoomModel({
     book: [roomModel]
   }
   );
-
+  HomeRoomModel.findOne({ __type: 'Room' }, (err, data) => {
+    if (err) { return next(err); }
+    if (data) {
+      console.log(data.book);
+      data.book = [...data.book, ...homeRoomModel.book];
+      data.save((err) => {
+        if (err) { return next(err); }
+        req.flash('success', { msg: 'Đặt phòng ' + req.body.name + ' thành công.' });
+        res.redirect('/');
+      });
+    } else {
+      homeRoomModel.save((err) => {
+        if (err) { return next(err); }
+        req.flash('success', { msg: 'Đặt phòng ' + req.body.name + ' thành công.' });
+        res.redirect('/');
+      });
+    }
+  });
   ContactModel.findOne({ __type: 'contact' }, (err, data) => {
     email = data.email;
+    console.log(data);
     let transporter = nodemailer.createTransport({
       service: 'Gmail',
       auth: {
@@ -151,6 +177,7 @@ exports.postBookRoom = (req, res, next) => {
       text: `Thông tin đặt phòng \n 
          Ngày đên :${req.body.checkin} \n
          Ngày đi :${req.body.checkout} \n
+         Số ngày :${diffDays} \n
          Loại phòng:${req.body.room_type} \n
          Số người :${req.body.people} \n
          CMTND :${req.body.identity_card} \n
@@ -165,31 +192,46 @@ exports.postBookRoom = (req, res, next) => {
       }
     });
   });
-
-
-  // 
-  HomeRoomModel.findOne({ __type: 'Room' }, (err, data) => {
-    if (err) { return next(err); }
-    if (data) {
-      data.book = [...data.book, ...homeRoomModel.book];
-      data.save((err) => {
-        if (err) { return next(err); }
-        res.redirect('/');
-      });
-    } else {
-      homeRoomModel.save((err) => {
-        if (err) { return next(err); }
-        res.redirect('/');
-      });
-    }
+  HomeRoomModel.findOne({ __type: 'book' }, (err, data) => {
+    email = data.book.email;
+    console.log(email);
+    if (!data) { return; }
+    let transporter = nodemailer.createTransport({
+      service: 'Gmail',
+      auth: {
+        user: "qlks2020@gmail.com",
+        pass: "qLKS2020@"
+      }
+    });
+    const mailOptions = {
+      to: 'selinadhv11904@gmail.com',
+      from: 'qlks2020@gmail.com',//process.env.SENDGRID_USER
+      subject: 'Thông tin đặt phòng',
+      text: `Thông tin đặt phòng \n 
+         Ngày đên :${req.body.checkin} \n
+         Ngày đi :${req.body.checkout} \n
+         Số ngày :${diffDays} \n
+         Loại phòng:${req.body.room_type} \n
+         Số người :${req.body.people} \n
+         CMTND :${req.body.identity_card} \n
+         Số điện thoại :${req.body.phone} \n
+         Email :${req.body.email} \n`
+    };
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
   });
+  
 };
 exports.deleteBookRoom = (req, res, next) => {
-
   HomeRoomModel.findOne({ __type: 'Room' }, (err, data) => {
     if (err) { return next(err); }
     if (data) {
-      console.log(req.body.page_number * 10 + parseInt(req.body.id));
+      // console.log(req.body.page_number * 10 + parseInt(req.body.id));
       data.book.splice(req.body.page_number * 10 + parseInt(req.body.id), 1);
       // data.book.splice(req.body.id,1);
       data.save((err) => {

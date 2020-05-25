@@ -18,9 +18,11 @@ block content
                      
                       <tr>
                         <th>CMND</th>
-                        <th>Ngày tới </th>
-                        <th>Ngày đi</th>
-                        <th>Loại</th>
+                        <th>Id Phòng</th>
+                        <th>Loại phòng</th>
+                        <th>Ngày đặt phòng </th>
+                        <th>Ngày trả phòng</th>
+                        <th>Thời gian (ngày)</th>
                         <th>Số người</th>
                         <th>Điện thoại</th>
                         <th>Email</th>
@@ -31,9 +33,11 @@ block content
                         each item in data.book    
                             tr
                               td= item.identity_card
+                              td= item._id
+                              td= item.room_type
                               td= item.checkin
                               td= item.checkout
-                              td= item.room_type
+                              td= item.duration
                               td= item.people
                               td= item.phone
                               td= item.email

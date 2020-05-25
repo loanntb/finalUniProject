@@ -13,6 +13,7 @@ var _ = require('lodash');  /* jshint ignore:line */
 var CommandList = require('./v1/command').CommandList;
 var RatePlanList = require('./v1/ratePlan').RatePlanList;
 var SimList = require('./v1/sim').SimList;
+var UsageRecordList = require('./v1/usageRecord').UsageRecordList;
 var Version = require('../../base/Version');  /* jshint ignore:line */
 
 
@@ -22,6 +23,8 @@ var Version = require('../../base/Version');  /* jshint ignore:line */
  *
  * @constructor Twilio.Wireless.V1
  *
+ * @property {Twilio.Wireless.V1.UsageRecordList} usageRecords -
+ *          usageRecords resource
  * @property {Twilio.Wireless.V1.CommandList} commands - commands resource
  * @property {Twilio.Wireless.V1.RatePlanList} ratePlans - ratePlans resource
  * @property {Twilio.Wireless.V1.SimList} sims - sims resource
@@ -33,6 +36,7 @@ function V1(domain) {
   Version.prototype.constructor.call(this, domain, 'v1');
 
   // Resources
+  this._usageRecords = undefined;
   this._commands = undefined;
   this._ratePlans = undefined;
   this._sims = undefined;
@@ -42,27 +46,35 @@ _.extend(V1.prototype, Version.prototype);
 V1.prototype.constructor = V1;
 
 Object.defineProperty(V1.prototype,
+  'usageRecords', {
+    get: function() {
+      this._usageRecords = this._usageRecords || new UsageRecordList(this);
+      return this._usageRecords;
+    }
+});
+
+Object.defineProperty(V1.prototype,
   'commands', {
-  get: function() {
-    this._commands = this._commands || new CommandList(this);
-    return this._commands;
-  }
+    get: function() {
+      this._commands = this._commands || new CommandList(this);
+      return this._commands;
+    }
 });
 
 Object.defineProperty(V1.prototype,
   'ratePlans', {
-  get: function() {
-    this._ratePlans = this._ratePlans || new RatePlanList(this);
-    return this._ratePlans;
-  }
+    get: function() {
+      this._ratePlans = this._ratePlans || new RatePlanList(this);
+      return this._ratePlans;
+    }
 });
 
 Object.defineProperty(V1.prototype,
   'sims', {
-  get: function() {
-    this._sims = this._sims || new SimList(this);
-    return this._sims;
-  }
+    get: function() {
+      this._sims = this._sims || new SimList(this);
+      return this._sims;
+    }
 });
 
 module.exports = V1;

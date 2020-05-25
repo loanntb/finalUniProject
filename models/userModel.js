@@ -13,9 +13,7 @@ const userSchema = new mongoose.Schema({
   role:String,
   profile: {
     name: String,
-    phone: String,
-    start_time:String,
-    finish_time: String
+    phone: String
   }
 }, { timestamps: true });
 

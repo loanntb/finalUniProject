@@ -2,14 +2,13 @@ extends layout
 
 block content
   section.bg-title-page.flex-c-m.p-t-160.p-b-80.p-l-15.p-r-15(style='background-image: url(images/premier-room.jpg);')
-    h2.tit6.t-center Hotel room
-  section.bg1-pattern.p-t-120.p-b-105
+    h2.tit6.t-center Phòng Khách Sạn
+  section.bg1-pattern.p-t-60.p-b-40
    if typeof(dataroom.room)!= "undefined" 
     .container
-      // Delicious
     each item,index in dataroom.room
      if index %2 == 0   
-      .row.p-t-170(id=index)
+      .row(id=index)
         .col-md-6.p-t-45.p-b-30
          a(href="#book",onclick="change('"+item.type+"')")
           .wrap-text-delicious.t-center
@@ -26,9 +25,8 @@ block content
         .col-md-6.p-b-30
           .wrap-pic-delicious.size2.bo-rad-10.hov-img-zoom.m-l-r-auto
             img(src=item.image, alt='IMG-OUR')
-      // Romantic
      else 
-      .row.p-t-170(id=index)
+      .row.p-t-60(id=index)
         .col-md-6.p-b-30
           .wrap-pic-romantic.size2.bo-rad-10.hov-img-zoom.m-l-r-auto
             img(src=item.image, alt='IMG-OUR')
@@ -66,7 +64,12 @@ block content
                 .wrap-inputdate.pos-relative.txt10.size12.bo2.bo-rad-10.m-t-3.m-b-23
                   select.selection-1(name="room_type",id="type")
                     each item in dataroom.room  
-                      option(value=item.type)=item.type   
+                      option(value=item.type)=item.type
+            span.txt6(style="padding-right: 15px; width: 190px;") Tên phòng
+                .wrap-inputdate.pos-relative.txt10.size12.bo2.bo-rad-10.m-t-3.m-b-23
+                  select.selection-1(name="name",id="name")
+                    each item in dataroom.room  
+                      option(value=item._roomID)=item.name   
             span.txt6(style="padding-right: 15px;") Số người lớn
                 .wrap-inputdate.pos-relative.txt10.size12.bo2.bo-rad-10.m-t-3.m-b-23
                   select.selection-1(name="people")
