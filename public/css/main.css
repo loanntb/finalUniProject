@@ -611,6 +611,7 @@ input[type="date" i] {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-left: 325px;
 }
 
 .main_menu li {
@@ -629,9 +630,9 @@ input[type="date" i] {
   font-family: Montserrat;
   font-weight: 400;
   font-size: 14px;
-  text-transform: uppercase;
+  text-transform: capitalize;
   color: white;
-  padding: 15px;
+  padding: 6px;
 }
 
 .header-fixed .main_menu>li>a {
@@ -1670,3 +1671,6 @@ body {
   z-index: 9999 !important;
 }
 
+button.btn3.size13.trans-0-4 {
+  color: white;
+}

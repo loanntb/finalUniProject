@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const ObjectId = require('mongodb').ObjectID;
 const moment = require('moment');
 // const Schema = mongoose.Schema;
 // https://stackoverflow.com/questions/14453864/use-more-than-one-schema-per-collection-on-mongodb
@@ -36,7 +35,6 @@ const RoomBookModel = mongoose.model('RoomBookModel', roombookSchema);
 const roomchema = new mongoose.Schema({
   room:[roomSchema],
   book:[roombookSchema]},
-  
  { collection: 'room' });
 const baseOptions = {
   discriminatorKey: '__type',

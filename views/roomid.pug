@@ -1,55 +1,7 @@
 extends layout
 
 block content
-  section.bg-title-page.flex-c-m.p-t-160.p-b-80.p-l-15.p-r-15(style='background-image: url(images/premier-room.jpg);')
-  section.bg1-pattern.p-t-60.p-b-40
-   if typeof(dataroom.room)!= "undefined" 
-    .container
-    each item,index in dataroom.room
-     if index %2 == 0   
-      .row(id=index)
-        .col-md-6.p-t-45.p-b-30
-         a(href="#book",onclick="change('"+item.type+"')")
-          .wrap-text-delicious.t-center
-            span.tit2.t-center
-              | #{item.name} ||  
-            span.tit2.t-center
-              | #{item.type}
-            h3.tit7.t-center.m-b-35.m-t-5
-              | #{item.convenient}
-            p.t-center.m-b-22.size3.m-l-r-auto
-              | Diện tích: #{item.area} , Số giường ngủ :#{item.amount_bed}
-            p.t-center.m-b-22.size3.m-l-r-auto(style="word-wrap: break-word")  
-              |  #{item.description} 
-            p.t-center.m-b-22.size3.m-l-r-auto.tit2 
-              |  #{item.price} (VND)/NGÀY
-            a(href="/pages/bookroom/"+item._id+"")
-             button.btn3.size13.trans-0-4(type="button") Đặt phòng
-        .col-md-6.p-b-30
-          .wrap-pic-delicious.size2.bo-rad-10.hov-img-zoom.m-l-r-auto
-            img(src=item.image, alt='IMG-OUR')
-     else 
-      .row.p-t-60(id=index)
-        .col-md-6.p-b-30
-          .wrap-pic-romantic.size2.bo-rad-10.hov-img-zoom.m-l-r-auto
-            img(src=item.image, alt='IMG-OUR')
-        .col-md-6.p-t-45.p-b-30
-         a(href="#book",onclick="change('"+item.type+"')")
-          .wrap-text-romantic.t-center
-            span.tit2.t-center
-              | #{item.name} || 
-            span.tit2.t-center
-              | #{item.type}
-            h3.tit7.t-center.m-b-35.m-t-5
-              | #{item.convenient}
-            p.t-center.m-b-22.size3.m-l-r-auto
-              | Có diện tích: #{item.area} , Số giường ngủ : #{item.amount_bed}  
-            p.t-center.m-b-22.size3.m-l-r-auto(style="word-wrap: break-word")
-              | #{item.description}
-            p.t-center.m-b-22.size3.m-l-r-auto.tit2 
-              |  #{item.price} (VND)/NGÀY 
-            a(href="/pages/book/room/"+index+"")
-             button.btn3.size13.trans-0-4(type="button") Đặt phòng  
+  section.bg-title-page.flex-c-m.p-t-160.p-b-80.p-l-15.p-r-15(style='background-image: url(images/premier-room.jpg);')  
   .header-intro.parallax100.t-center.p-t-135.p-b-158(style="background-image: url(images/premier-room.jpg);",id="book")
     span.tit2.p-l-15.p-r-15 Đặt phòng
         form.wrap-form-booking(action="/pages/book/room",method='POST')
@@ -69,14 +21,10 @@ block content
           .d-inline-flex.p-2 
             span.txt6(style="padding-right: 15px; width: 190px;") Loại phòng
                 .wrap-inputdate.pos-relative.txt10.size12.bo2.bo-rad-10.m-t-3.m-b-23
-                  select.selection-1(name="room_type",id="type")
-                    each item in dataroom.room  
-                      option(value=item.type)=item.type
+                  
             span.txt6(style="padding-right: 15px; width: 190px;") Tên phòng
                 .wrap-inputdate.pos-relative.txt10.size12.bo2.bo-rad-10.m-t-3.m-b-23
-                  select.selection-1(name="name",id="name")
-                    each item in dataroom.room  
-                      option(value=item._roomID)=item.name   
+                    
             span.txt6(style="padding-right: 15px;") Số người lớn
                 .wrap-inputdate.pos-relative.txt10.size12.bo2.bo-rad-10.m-t-3.m-b-23
                   select.selection-1(name="people")

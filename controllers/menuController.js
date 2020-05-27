@@ -145,8 +145,6 @@ exports.postMenu = (req, res, next) => {
           data.food = [...data.food, ...homeMenuModel.food];
         }
       }
-
-
       data.save((err) => {
         if (err) { 
           console.log(err);

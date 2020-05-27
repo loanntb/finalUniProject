@@ -43,7 +43,7 @@ exports.postLogin = (req, res, next) => {
     }
     req.logIn(user, (err) => {
       if (err) { return next(err); }
-      req.flash('success', { msg: 'Bạn đã đăng nhập thành công!' });
+     // req.flash('success', { msg: 'Bạn đã đăng nhập thành công!' });
       res.redirect(req.session.returnTo || '/');
     });
   })(req, res, next);

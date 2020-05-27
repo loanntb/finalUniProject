@@ -3,11 +3,9 @@ extends layout
 block content
  if data.info
   section.bg-title-page.flex-c-m.p-t-160.p-b-80.p-l-15.p-r-15(style='background-image: url('+data.info.image+');')
-    h2.tit6.t-center
-      | Liên hệ
   h3.tit3.t-center.m-b-35.m-t-5
     | Giới thiệu 
-  .t-center.m-l-r-auto(style="padding: 0 20% 0 20%") !{data.info.description}
+  .t-center.m-l-r-auto(style="padding: 0 20% 0 20%; margin-bottom: 33px;") !{data.info.description}
   .gmap_canvas
     iframe#gmap_canvas(width='997', height='500', src='https://maps.google.com/maps?q='+data.info.address+'&t=&z=13&ie=UTF8&iwloc=&output=embed', frameborder='0', scrolling='no', marginheight='0', marginwidth='0')
   style.

@@ -43,7 +43,6 @@ exports.getbook = (req, res) => {
       data = new HomeRoomModel();
     }
     var page_size = 10;
-
     var count = Math.ceil(data.book.length / page_size) > 0 ? Math.ceil(data.book.length / page_size) : 0;
     var page_number = req.params.page > 0 ? req.params.page : 0;
     data.book = data.book.slice(page_number * page_size, (page_number + 1) * page_size);
@@ -52,10 +51,20 @@ exports.getbook = (req, res) => {
       data,
       count, page_number
     });
-
-
   });
+};
 
+exports.getbookID = (req, res) => {
+  var id = req.params.id;
+  console.log(id);
+  RoomModel.findById({_id: id }, (err, dataroom) => {
+    if (err) { return next(err); }
+    res.render('roomid', {
+      title: 'roomid',
+      dataroom
+    });
+    console.log(dataroom);
+  });
 };
 
 exports.postHomeRoom = (req, res, next) => {
@@ -122,10 +131,9 @@ exports.postBookRoom = (req, res, next) => {
   let checkout = req.body.checkout;
   let date1 = parseInt(checkin);
   let date2 = parseInt(checkout);
-  var diffDays = Math.ceil((date2 - date1) / (1000 * 3600 * 24)); //gives day difference 
+  var diffDays = Math.ceil((date2 - date1) / (1000 * 3600 * 24));  
   console.log(date1);
   console.log(diffDays);
-  
   const roomModel = new RoomBookModel({
     checkin: checkin,
     checkout: checkout,
@@ -141,20 +149,44 @@ exports.postBookRoom = (req, res, next) => {
     book: [roomModel]
   }
   );
-  HomeRoomModel.findOne({ __type: 'Room' }, (err, data) => {
+  
+  HomeRoomModel.find({ __type: 'Room' },
+  (err, data) => {
     if (err) { return next(err); }
+    
     if (data) {
-      console.log(data.book);
+      console.log(data.book.checkin);
       data.book = [...data.book, ...homeRoomModel.book];
       data.save((err) => {
         if (err) { return next(err); }
-        req.flash('success', { msg: 'Đặt phòng ' + req.body.name + ' thành công.' });
+        req.flash('success', { msg: 'Đặt phòng thành công.' });
         res.redirect('/');
       });
     } else {
       homeRoomModel.save((err) => {
         if (err) { return next(err); }
-        req.flash('success', { msg: 'Đặt phòng ' + req.body.name + ' thành công.' });
+        req.flash('success', { msg: 'Đặt phòng thành công.' });
+        res.redirect('/');
+      });
+    }
+  });
+
+  HomeRoomModel.findOne({ __type: 'Room' },
+  (err, data) => {
+    if (err) { return next(err); }
+    
+    if (data) {
+      console.log(data.book.checkin);
+      data.book = [...data.book, ...homeRoomModel.book];
+      data.save((err) => {
+        if (err) { return next(err); }
+        req.flash('success', { msg: 'Đặt phòng thành công.' });
+        res.redirect('/');
+      });
+    } else {
+      homeRoomModel.save((err) => {
+        if (err) { return next(err); }
+        req.flash('success', { msg: 'Đặt phòng thành công.' });
         res.redirect('/');
       });
     }
@@ -178,7 +210,6 @@ exports.postBookRoom = (req, res, next) => {
          Ngày đên :${req.body.checkin} \n
          Ngày đi :${req.body.checkout} \n
          Số ngày :${diffDays} \n
-         Loại phòng:${req.body.room_type} \n
          Số người :${req.body.people} \n
          CMTND :${req.body.identity_card} \n
          Số điện thoại :${req.body.phone} \n
@@ -211,7 +242,6 @@ exports.postBookRoom = (req, res, next) => {
          Ngày đên :${req.body.checkin} \n
          Ngày đi :${req.body.checkout} \n
          Số ngày :${diffDays} \n
-         Loại phòng:${req.body.room_type} \n
          Số người :${req.body.people} \n
          CMTND :${req.body.identity_card} \n
          Số điện thoại :${req.body.phone} \n
