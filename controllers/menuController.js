@@ -1,6 +1,5 @@
 
-const { MenuModel, HomeBookModel,
-  HomeMenuModel, } = require('../models/menuModel');
+const { MenuModel, HomeBookModel, HomeMenuModel, } = require('../models/menuModel');
 const nodemailer = require('nodemailer');
 const { ContactModel } = require('../models/contactModel');
 /**
@@ -73,8 +72,6 @@ exports.postHomeBookTable = (req, res, next) => {
       auth: {
         user: email.email,
         pass: email.password
-        // user: 'thamnguyen12985@gmail.com',// account test
-        // pass: 'tangthanh85'
       }
     });
     const mailOptions = {

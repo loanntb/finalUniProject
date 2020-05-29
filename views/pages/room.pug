@@ -1,7 +1,7 @@
 extends ../admin_layout
 block content
   section.content-header
-    h1 Phòng
+    h1 Trang phòng
     ol.breadcrumb
       li
         a(href="/")
@@ -21,30 +21,24 @@ block content
                   input(type='hidden',id="link1", name='id')
                   .box-body
                     .form-group
-                      label(for="description") Tên phòng 
-                      input.form-control(type="text", id="name", name="name", autocomplete='tên phòng')
-                    .form-group
-                      label(for="description") Tầng 
-                      input.form-control(type="text", id="floor", name="floor", autocomplete='description')
-                    .form-group
                       label(for="description") Loại phòng 
-                      input.form-control(type="text", id="type", name="type", autocomplete='loại phòng')
+                      input.form-control(type="text", id="type", name="type", autocomplete='description')
                       .form-group
                       label(for="description") Mô tả chung 
-                      input.form-control(type="text", id="description", name="description", autocomplete='Mô tả chung')
+                      input.form-control(type="text", id="description", name="description", autocomplete='description')
                     .form-group
-                      label(for="description") Tiện nghi 
+                      label(for="convenient") Tiện nghi 
                       input.form-control(type="text", id="convenient", name="convenient", placeholder="Hướng phòng , lược , máy sấy, tủ quần áo,... ")
                     .form-group
-                      label(for="description") Không gian
+                      label(for="Space") Không gian
                       .form-group(style="display: flex;")
                         input.form-control(type="Number", id="area", name="area", placeholder="Diện tích")  
                         input.form-control(type="number",id="amount_bed",name="amount_bed",placeholder="Số giường ")
                     .form-group
-                      label(for="welcome_url") Giá
+                      label(for="price") Giá
                       input.form-control(type="Number", id="price", name="price", autocomplete='welcome_url')
                     .form-group
-                        <label for="exampleInputFile">Upload</label>
+                        <label for="exampleInputFile">Chọn ảnh</label>
                         <input type="file" id="welcome" name="room">
                         <p class="help-block">Kích thước ảnh: 720 x 959</p>
                         img(src="",class="img-responsive hidden",id="img",style="width: 400px;height: 300px;", alt="")
@@ -71,8 +65,7 @@ block content
                     if typeof(data.room)!= "undefined"
                       each item in data.room     
                           tr
-                            td= item.type
-                                                   
+                            td= item.type                          
                             td= item.amount_bed 
                             td
                               img(class="img-thumbnail" ,style="width: 50px;height: 50px;", src=item.image)
@@ -94,7 +87,7 @@ block content
                         $( "#senddata2" ).submit();
                           };        
                       function editTitle(id){
-                        var arr=[#{data.room}] ;
+                        var arr=[#{data.room}];
                         $('#type').val(arr[id]['type']);
                         $('#description').val(arr[id]['description']);
                         $('#convenient').val(arr[id]['convenient']);

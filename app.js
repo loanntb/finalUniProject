@@ -151,6 +151,7 @@ app.get('/', homeController.index);
 app.get('/menu', menuController.menu);
 app.get('/room', roomController.homepage);
 app.get('/cafe', cafeController.getHome);
+app.get('/booking/:id', roomController.getbookID);
 app.post('/booking', menuController.postHomeBookTable);
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
@@ -191,7 +192,6 @@ app.post('/pages/menu/delete',passportConfig.isAuthenticated, menuController.del
 app.get('/pages/book/table/:page?',passportConfig.isAuthenticated, menuController.getbook);
 app.post('/pages/book/table/delete',passportConfig.isAuthenticated, menuController.deleteBookTable);
 app.get('/pages/book/room/:page?',passportConfig.isAuthenticated, roomController.getbook);
-app.get('/pages/bookroom/:id',passportConfig.isAuthenticated, roomController.getbookID);
 app.post('/pages/book/room/',passportConfig.isAuthenticated, roomController.postBookRoom);
 app.post('/pages/book/room/delete',passportConfig.isAuthenticated, roomController.deleteBookRoom);
 //contact

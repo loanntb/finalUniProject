@@ -20,11 +20,11 @@ const roomSchema = new mongoose.Schema({
 });
 const roombookSchema = new mongoose.Schema({
   _bookingId: Schema.Types.ObjectId,
-  checkin: String,
-  checkout: String,
+  checkin: Date,
+  checkout: Date,
   duration: Number,
-  room_type:String,
   people: String,
+  total_price: Number,
   phone:String,
   email:String,
   identity_card:String,
