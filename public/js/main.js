@@ -84,7 +84,8 @@
         "showDropdowns": true,
         minDate: new Date(),
         locale: {
-            format: 'DD/MM/YYYY'
+           // format: 'DD/MM/YYYY'
+            format: 'YYYY-MM-DD'
         },
     });
 
@@ -119,7 +120,13 @@
         e.stopPropagation();
     });
 
-
+ /*[ datetimepicker]
+    ===========================================================*/
+    $(function  () {
+    $('.datetimepicker1').datetimepicker({
+    format: 'YYYY-MM-DD'
+    });
+    });
     /*[ Play video 01]
     ===========================================================*/
     var srcOld = $('.video-mo-01').children('iframe').attr('src');

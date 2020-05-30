@@ -15,8 +15,10 @@ const roomSchema = new mongoose.Schema({
   description:String,
   area: String,
   amount_bed:String,
-  price: String,
-  image:String,
+  occupancy:{ type: String, default: '1' },
+  price: Number,
+  image: String,
+  status:{ type: String, default: 'empty' }
 });
 const roombookSchema = new mongoose.Schema({
   _bookingId: Schema.Types.ObjectId,
@@ -28,10 +30,13 @@ const roombookSchema = new mongoose.Schema({
   phone:String,
   email:String,
   identity_card:String,
+  status: {type: String, default: 'ordered'},
   roomId: { type: Schema.ObjectId, ref: 'RoomModel' }
 });
+
 const RoomModel = mongoose.model('roomModel', roomSchema);
 const RoomBookModel = mongoose.model('RoomBookModel', roombookSchema);
+
 const roomchema = new mongoose.Schema({
   room:[roomSchema],
   book:[roombookSchema]},

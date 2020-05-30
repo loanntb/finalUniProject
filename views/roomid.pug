@@ -16,11 +16,14 @@ html
     link(rel='stylesheet', href='/vendor/animsition/css/animsition.min.css')
     link(rel='stylesheet', href='/vendor/select2/select2.min.css')
     link(rel='stylesheet', href='/vendor/daterangepicker/daterangepicker.css')
+    link(rel='stylesheet', href='/vendor/datetimepicker/bootstrap-datetimepicker.min.css')
+    link(rel='stylesheet', href='/vendor/datetimepicker/bootstrap-datetimepicker-standalone.css')
     link(rel='stylesheet', href='/vendor/slick/slick.css')
     link(rel='stylesheet', href='/vendor/slick/slick-theme.css')
     link(rel='stylesheet', href='/vendor/lightbox2/css/lightbox.min.css')
     link(rel='stylesheet', href='/css/util.css')
     link(rel='stylesheet', href='/css/main.css')
+    
     //- script(src='/js/lib/Chart.min.js')
 
   body.animsition
@@ -66,41 +69,71 @@ html
       .header-intro.parallax100.t-center.p-t-135.p-b-158(style="background-image: url(../images/premier-room.jpg);",id="book")
             form.wrap-form-booking(action="/pages/book/room",method='POST')
               input(type='hidden', name='_csrf', value=_csrf)
-              .d-inline-flex.p-2
-                span.txt6(style="padding-right: 15px;") CMTND
-                    .wrap-inputdate.pos-relative.txt10.size12.bo2.bo-rad-10.m-t-3.m-b-23
-                      input.bo-rad-10.sizefull.txt10.p-l-20(type="text", name="identity_card")
-                span.txt6(style="padding-right: 15px;") Ngày đến
-                    .wrap-inputdate.pos-relative.txt10.size12.bo2.bo-rad-10.m-t-3.m-b-23
-                      input.my-calendar.bo-rad-10.sizefull.txt10.p-l-20(type="text", name="checkin")
-                      i.btn-calendar.fa.fa-calendar.ab-r-m.hov-pointer.m-r-18(aria-hidden="true")
-                span.txt6 Ngày đi
-                    .wrap-inputdate.pos-relative.txt10.size12.bo2.bo-rad-10.m-t-3.m-b-23
-                      input.my-calendar.bo-rad-10.sizefull.txt10.p-l-20(type="text", name="checkout")
-                      i.btn-calendar.fa.fa-calendar.ab-r-m.hov-pointer.m-r-18(aria-hidden="true")  
-              .d-inline-flex.p-2     
-                span.txt6(style="padding-right: 15px;") Số người lớn
-                    .wrap-inputdate.pos-relative.txt10.size12.bo2.bo-rad-10.m-t-3.m-b-23
-                      select.selection-1(name="people")
-                        option 1
-                        option 2
-                        option 3
-                        option 4
-                        option 5
-                        option 6
-                        option 7
-                        option 8
-                        option 9
-                        option 10
-                span.txt6(style="padding-right: 15px;") Điện thoại
-                    .wrap-inputdate.pos-relative.txt10.size12.bo2.bo-rad-10.m-t-3.m-b-23
-                      input.bo-rad-10.sizefull.txt10.p-l-20(type="tel", name="phone")
-                span.txt6 Email
-                    .wrap-inputdate.pos-relative.txt10.size12.bo2.bo-rad-10.m-t-3.m-b-23
-                      input.bo-rad-10.sizefull.txt10.p-l-20(type="Email", name="email")                            
-              .wrap-btn-booking.flex-c-m.m-t-6
-                  button.btn3.flex-c-m.size13.txt11.trans-0-4(type="submit") Đặt phòng     
-                    script(type='text/javascript').
+              .container
+                div.tit2.p-l-15.p-r-15(style='display: flex;justify-content: center;margin-top: -100px !important;padding-bottom: 60px;') Đặt phòng
+                .row
+                  .col-xs-12.col-sm-6
+                    .box
+                      .row.form-group
+                        label.col-lg-4.txt6 Ngày đến
+                        .col-lg-8.input-group.date.datetimepicker1
+                          input.form-control(type='text', name='checkin')
+                          span.input-group-addon
+                            span.glyphicon.glyphicon-calendar
+                      .row.form-group
+                        label.col-lg-4.txt6 Ngày đi
+                        .col-lg-8.input-group.date.datetimepicker1
+                          input.form-control(type='text', name='checkout')
+                          span.input-group-addon
+                            span.glyphicon.glyphicon-calendar
+                      .row.form-group
+                        label.col-lg-4.txt6 Số người lớn
+                        .col-lg-8
+                          select.selection-1(name="people",id="people")
+                            option(value= roomId.occupancy)=roomId.occupancy
+                            -for(var i = 1;i < roomId.occupancy;i++){
+                              option(value="#{i}") #{i}
+                            -}
+                      .row.form-group
+                        label.col-lg-4.txt6 Tên phòng
+                        .col-lg-8
+                          input.form-control(type='text' disabled, name= roomId.name value = roomId.name)
+                  .col-xs-12.col-sm-6
+                    .box
+                     .row.form-group
+                        label.col-lg-4.txt6 điện thoại
+                        .col-lg-8
+                          input.form-control(type='text', name='phone')
+                     .row.form-group
+                        label.col-lg-4.txt6 email
+                        .col-lg-8
+                          input.form-control(type='text', name='email')
+                     .row.form-group
+                        label.col-lg-4.txt6 CMTN
+                        .col-lg-8
+                          input.form-control(type='text', name='identity_card')
+                     .row.form-group(style='display: none;')
+                        label.col-lg-4.txt6 Gía tiền
+                        .col-lg-8
+                           select.selection-1(name="price",id="price")
+                            option(value= roomId.price selected)=roomId.price
+                     .row.form-group(style='display: none;')
+                        label.col-lg-4.txt6 Tên phòng
+                        .col-lg-8
+                           select.selection-1(name="name",id="name")
+                            option(value= roomId.name selected)=roomId.name
+                     .row.form-group(style='display: none;')
+                        label.col-lg-4.txt6 Tên phòng
+                        .col-lg-8
+                           select.selection-1(name="type",id="type")
+                            option(value= roomId.type selected)=roomId.type 
+                     .row.form-group
+                        label.col-lg-4.txt6 Loại phòng
+                        .col-lg-8
+                          input.form-control(type='text', roomId.type value = roomId.type disabled)
+                    .row.form-group(style="margin-top: 76px;margin-left: -106px;")
+                      button.btn3.flex-c-m.size13.txt11.trans-0-4(type="submit") Đặt phòng
+                              script(type='text/javascript').
                                 function change(id){
                                   $('#type').val(id).trigger('change'); 
                                 }; 
@@ -132,7 +165,7 @@ footer.bg1
             img(src="../images/booking-01.jpg", alt="GALLERY" style="width:130px;height: 130px;")
           a.item-gallery-footer.wrap-pic-w(href="../images/our-menu-05.jpg", data-lightbox="gallery-footer")
             img(src="../images/our-menu-05.jpg", alt="GALLERY" style="width:130px;height: 130px;")
-          a.item-gallery-footer.wrap-pic-w(href="../images/our-story-01.jpg", data-lightbox="gallery-footer")
+          a.item-gallery-footer.wrap-pic-w(href="images/our-story-01.jpg", data-lightbox="gallery-footer")
             img(src="../images/our-story-01.jpg", alt="GALLERY" style="width:130px;height: 130px;")
 
 script(src='/vendor/jquery/jquery-3.2.1.min.js')
@@ -142,6 +175,8 @@ script(src='/vendor/animsition/js/animsition.min.js')
 script(src='/vendor/select2/select2.min.js')
 script(src='/vendor/daterangepicker/moment.min.js')
 script(src='/vendor/daterangepicker/daterangepicker.js')
+script(src='/vendor/datetimepicker/moment.min.js')
+script(src='/vendor/datetimepicker/bootstrap-datetimepicker.min.js')
 script(src='/vendor/slick/slick.min.js')
 script(src='/js/slick-custom.js')
 script(src='/vendor/parallax100/parallax100.js')
