@@ -15,35 +15,23 @@ block content
               .box.box-success
                 .box-header.with-border
                   h3.box-title Loại phòng
-                form(action='/pages/room', method='POST', enctype='multipart/form-data')
+                form(action='/pages/typeroom', method='POST', enctype='multipart/form-data')
                   input(type='hidden', name='_csrf', value=_csrf)
                   input(type='hidden',id="link", name='img')
                   input(type='hidden',id="link1", name='id')
                   .box-body
                     .form-group
-                      label(for="Space") Tên phòng
-                      .form-group(style="display: flex;")
-                        input.form-control(type="text", id="name", name="name", placeholder="Tên phòng") 
-                    .form-group
-                      label(for='loại phòng')  Loại phòng
-                      select#type.form-control(name="type")
-                        each item in typeroom 
-                          option(value= item._id selected)=item.type
+                      label(for="description") Tên loại phòng 
+                      input.form-control(type="text", id="name", name="name", autocomplete='name')
                     .form-group
                       label(for="description") Vị trí 
-                      input.form-control(type="text", id="floor", name="floor", autocomplete='Tầng')
-                      .form-group
-                      label(for="description") Mô tả chung 
-                      input.form-control(type="text", id="description", name="description", autocomplete='Mô tả chung')
+                      input.form-control(type="text", id="floor", name="floor", autocomplete='floor')
                     .form-group
-                      label(for="convenient") Tiện nghi 
-                      input.form-control(type="text", id="convenient", name="convenient", placeholder="Hướng phòng , lược , máy sấy, tủ quần áo,... ")
+                      label(for="description") Loại phòng 
+                      input.form-control(type="text", id="type", name="type", autocomplete='description')
                     .form-group
-                      label(for="Space") Không gian
-                      .form-group(style="display: flex;")
-                        input.form-control(type="Number", id="area", name="area", placeholder="Diện tích")  
-                        input.form-control(type="number",id="amount_bed",name="amount_bed",placeholder="Số giường ")
-                        input.form-control(type="number",id="occupancy",name="occupancy", placeholder="Số người tối đa")
+                      label(for="price") Giá
+                      input.form-control(type="Number", id="price", name="price", autocomplete='welcome_url')
                     .form-group
                         <label for="exampleInputFile">Chọn ảnh</label>
                         <input type="file" id="welcome" name="room">
@@ -56,13 +44,13 @@ block content
             .col-md-6
               .box.box-success
                 .box-header.with-border
-                  h3.box-title Phòng
+                  h3.box-title Loại Phòng
                 .box-body.table-responsive.no-padding
                     <table class="table table-hover ">
                      <thead>
                       <tr>
-                        <th>Tên phòng</th>
-                        <th>Số giường ngủ</th>
+                        <th>Tên loại phòng</th>
+                        <th>Giá</th>
                         <th>Ảnh</th>
                         <th></th>
                       </tr>
@@ -72,8 +60,8 @@ block content
                     if typeof(data)!= "undefined"
                       each item in data   
                           tr
-                            td= item.name                          
-                            td= item.amount_bed 
+                            td= item.type_name                          
+                            td= item.price
                             td
                               img(class="img-thumbnail" ,style="width: 50px;height: 50px;", src=item.image)
                             td 
@@ -85,25 +73,18 @@ block content
                     <tbody>        
                     </table>
 
-                form(action='/pages/room/delete',class="visible", method='POST',id="senddata2")
+                form(action='/pages/typeroom/delete',class="visible", method='POST',id="senddata2")
                   input(type='hidden', name='_csrf', value=_csrf)
                   input(type='hidden', name='id',id="imgurl2")
                 script(type='text/javascript').
-                      function deleteRoom(id){
+                    function deleteRoom(id){
                         $('#imgurl2').val(id);
                         $( "#senddata2" ).submit();
-                          }; 
-                          function editTitle(id){
-                        var arr=[#{data}] ;
-                        $('#name').val(arr[id]['name']);
-                        $('#type').val(arr[id]['type']);
-                        $('#floor').val(arr[id]['floor']);
-                        $('#description').val(arr[id]['description']);
-                        $('#convenient').attr("src", arr[id]['convenient']);
-                        $('#area').val(arr[id]['area']);
-                        $('#amount_bed').val(arr[id]['amount_bed']);
-                        $('#occupancy').val(arr[id]['occupancy']);
+                    }; 
+                    function editTitle(id){
+                        var arr=[#{data}];
                         $('#price').val(arr[id]['price']);
+                        $('#type').val(arr[id]['type']);
                         $('#img').attr("src", arr[id]['image']);
                         $('#img').removeClass( "hidden" );
                         $('#link').val(arr[id]['image']); 

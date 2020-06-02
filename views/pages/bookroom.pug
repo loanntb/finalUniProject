@@ -28,12 +28,12 @@ block content
                         <th>Email</th>
                         <th>Hành động</th>
                       </tr>
-                      if typeof(data.book)!= "undefined" 
+                      if typeof(data)!= "undefined" 
                         - var i=0 
-                        each item in data.book    
+                        each item, index in data  
                             tr
                               td= item.identity_card
-                              td= item._id
+                              td= item.roomID
                               td= item.room_type
                               td= item.checkin
                               td= item.checkout
@@ -60,6 +60,6 @@ block content
                             $('#imgurl2').val(id);
                             $( "#senddata2" ).submit();
                               };
-            .dataTables_info(role='status', aria-live='polite') Showing #{parseInt(page_number)*10+ data.book.length==0?0:1} to #{parseInt(page_number)*10+data.book.length} of #{count} entries            
+            .dataTables_info(role='status', aria-live='polite') Hiển thị #{parseInt(page_number)*10+ data.length==0?0:1} đến #{parseInt(page_number)*10+data.length} của #{count} trang           
             if count > 1
               include admin_pagination                   

@@ -1,37 +1,68 @@
 extends layout
 
 block content
-  .bg-title-page.flex-c-m.p-t-160.p-b-80.p-l-15.p-r-15(style="background-image: url(images/bg-title-page-01.jpg);")
-  section.section-mainmenu.p-t-110.p-b-70.bg1-pattern
+  section.section-slide
+  .wrap-slick1
+    .slick1
+     if typeof(dataroom.room)!= "undefined" 
+      each item in dataroom.room 
+        .item-slick1.item-slick1(style='background-image: url('+item.image+');')
+            .wrap-content-slide1.sizefull.flex-col-c-m.p-l-15.p-r-15.p-t-150.p-b-170
+              span.caption1-slide1.txt1.t-center.animated.visible-false.m-b-15(data-appear='fadeInDown')=item.sub_title 
+              h2.caption2-slide1.tit1.t-center.animated.visible-false.m-b-37(data-appear="fadeInUp")=item.title
+              .wrap-btn-slide1.animated.visible-false(data-appear='zoomIn')
+    .wrap-slick1-dots
+  .header-intro.parallax100.t-center.p-t-24.p-b-24(style="background:#fff);",id="book")
+        span.tit2.t-center Có phòng phù hợp với khách hàng
+  section.bg1-pattern.p-t-60.p-b-40
+   if typeof(dataroom.room)!= "undefined" 
     .container
-      .row
-        .col-md-10.col-lg-6.p-r-35.p-r-15-lg.m-l-r-auto
-          .wrap-item-mainmenu.p-b-22
-            h3.tit-mainmenu.tit10.p-b-25
-              | Drinks / Đồ uống
-            // Item mainmenu
-          if typeof(data.drink)!= "undefined" 
-            each item in data.drink  
-              .item-mainmenu.m-b-36
-                .flex-w.flex-b.m-b-3
-                  a.name-item-mainmenu.txt21=item.name
-                  .line-item-mainmenu.bg3-pattern
-                  .price-item-mainmenu.txt22='$'+item.price 
-                span.info-item-mainmenu.txt23=item.description
-      
-          
-        .col-md-10.col-lg-6.p-l-35.p-l-15-lg.m-l-r-auto
-          .wrap-item-mainmenu.p-b-22
-            h3.tit-mainmenu.tit10.p-b-25
-              | Food / Món ăn
-            // Item mainmenu
-          if typeof(data.food)!= "undefined"  
-            each item in data.food 
-              .item-mainmenu.m-b-36
-                .flex-w.flex-b.m-b-3
-                  a.name-item-mainmenu.txt21=item.name
-                  .line-item-mainmenu.bg3-pattern
-                  .price-item-mainmenu.txt22='$'+item.price    
-                span.info-item-mainmenu.txt23=item.description
-  include partials/home/table_booking              
-         
+    each item,index in dataroom.room
+     if index %2 == 0   
+      .row(id=index)
+        .col-md-6.p-t-45.p-b-30
+         a(href="#book",onclick="change('"+item.type+"')")
+          .wrap-text-delicious.t-center
+            span.tit2.t-center
+              | #{item.name} ||  
+            span.tit2.t-center
+              | #{item.type}
+            h3.tit7.t-center.m-b-35.m-t-5
+              | #{item.convenient}
+            p.t-center.m-b-22.size3.m-l-r-auto
+              | Diện tích: #{item.area} m² , Số giường ngủ :#{item.amount_bed}, Số người tối đa : #{item.occupancy}  
+            p.t-center.m-b-22.size3.m-l-r-auto(style="word-wrap: break-word")  
+              |  #{item.description} 
+            p.t-center.m-b-22.size3.m-l-r-auto.tit2 
+              |  #{item.price} (VND)/NGÀY
+            a(href="/booking/"+item._id+"")
+             button.btn3.size13.trans-0-4(type="button") Đặt phòng
+        .col-md-6.p-b-30
+          .wrap-pic-delicious.size2.bo-rad-10.hov-img-zoom.m-l-r-auto
+            img(src=item.image, alt='IMG-OUR')
+     else 
+      .row.p-t-60(id=index)
+        .col-md-6.p-b-30
+          .wrap-pic-romantic.size2.bo-rad-10.hov-img-zoom.m-l-r-auto
+            img(src=item.image, alt='IMG-OUR')
+        .col-md-6.p-t-45.p-b-30
+         a(href="#book",onclick="change('"+item.type+"')")
+          .wrap-text-romantic.t-center
+            span.tit2.t-center
+              | #{item.name} || 
+            span.tit2.t-center
+              | #{item.type}
+            h3.tit7.t-center.m-b-35.m-t-5
+              | #{item.convenient}
+            p.t-center.m-b-22.size3.m-l-r-auto
+              | Có diện tích: #{item.area} m², Số giường ngủ: #{item.amount_bed}, Số người tối đa : #{item.occupancy}  
+            p.t-center.m-b-22.size3.m-l-r-auto(style="word-wrap: break-word")
+              | #{item.description}
+            p.t-center.m-b-22.size3.m-l-r-auto.tit2 
+              |  #{item.price} (VND)/NGÀY 
+            a(href="/booking/"+item._id+"")
+             button.btn3.size13.trans-0-4(type="button") Đặt phòng  
+                script(type='text/javascript').
+                   function change(id){
+                              $('#type').val(id).trigger('change'); 
+                            };          

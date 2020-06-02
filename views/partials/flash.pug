@@ -11,9 +11,8 @@ if messages.info
     for info in messages.info
       div= info.msg
 if messages.success
-  .box-body.p-b-0
-    .alert.alert-success.alert-dismissible.m-b-0
-      button.close(type='button', data-dismiss='alert', aria-hidden="true")
-        i.fa.fa-times-circle
-      for success in messages.success
-        div= success.msg
+  .alert.alert-success.alert-dismissible.m-b-0(style='z-index = 9999')
+    button.close(type='button', data-dismiss='alert', aria-hidden="true")
+      i.fa.fa-times-circle
+    for success in messages.success
+      div= success.msg

@@ -106,8 +106,7 @@ exports.postContact = (req, res) => {
           auth: {
             user: email.email,
             pass: email.password
-            // user: 'thamnguyen12985@gmail.com',// account test
-            // pass: 'tangthanh85'
+           
           }
         });
         const mailOptions = {

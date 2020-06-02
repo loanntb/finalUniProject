@@ -23,7 +23,6 @@ html
     link(rel='stylesheet', href='/vendor/lightbox2/css/lightbox.min.css')
     link(rel='stylesheet', href='/css/util.css')
     link(rel='stylesheet', href='/css/main.css')
-    
     //- script(src='/js/lib/Chart.min.js')
 
   body.animsition
@@ -65,12 +64,12 @@ html
         span.tit2.t-center.p-r-15
           | #{roomId.name} ||     
         span.tit2.t-center
-          | #{roomId.type}
-      .header-intro.parallax100.t-center.p-t-135.p-b-158(style="background-image: url(../images/premier-room.jpg);",id="book")
+          | #{roomId.type.type}
+      .header-intro.parallax100.t-center.p-t-35.p-b-45(style="background-image: url(../images/premier-room.jpg);",id="book")
             form.wrap-form-booking(action="/pages/book/room",method='POST')
               input(type='hidden', name='_csrf', value=_csrf)
               .container
-                div.tit2.p-l-15.p-r-15(style='display: flex;justify-content: center;margin-top: -100px !important;padding-bottom: 60px;') Đặt phòng
+                div.tit2.p-l-15.p-r-15(style='display: flex;justify-content: center;padding-bottom: 60px;') Đặt phòng
                 .row
                   .col-xs-12.col-sm-6
                     .box
@@ -117,13 +116,13 @@ html
                         .col-lg-8
                            select.selection-1(name="price",id="price")
                             option(value= roomId.price selected)=roomId.price
-                     .row.form-group(style='display: none;')
+                     .row.form-group(style='')
                         label.col-lg-4.txt6 Tên phòng
                         .col-lg-8
                            select.selection-1(name="name",id="name")
-                            option(value= roomId.name selected)=roomId.name
+                            option(value= roomId._id selected)=roomId.name
                      .row.form-group(style='display: none;')
-                        label.col-lg-4.txt6 Tên phòng
+                        label.col-lg-4.txt6 loại phòng
                         .col-lg-8
                            select.selection-1(name="type",id="type")
                             option(value= roomId.type selected)=roomId.type 
@@ -131,7 +130,7 @@ html
                         label.col-lg-4.txt6 Loại phòng
                         .col-lg-8
                           input.form-control(type='text', roomId.type value = roomId.type disabled)
-                    .row.form-group(style="margin-top: 76px;margin-left: -106px;")
+                    .row.form-group(style="margin-top: 70px;margin-left: -90px;")
                       button.btn3.flex-c-m.size13.txt11.trans-0-4(type="submit") Đặt phòng
                               script(type='text/javascript').
                                 function change(id){

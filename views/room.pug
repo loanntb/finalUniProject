@@ -4,8 +4,8 @@ block content
   section.section-slide
   .wrap-slick1
     .slick1
-     if typeof(dataroom.room)!= "undefined" 
-      each item in dataroom.room 
+     if typeof(dataroom)!= "undefined" 
+      each item in dataroom 
         .item-slick1.item-slick1(style='background-image: url('+item.image+');')
             .wrap-content-slide1.sizefull.flex-col-c-m.p-l-15.p-r-15.p-t-150.p-b-170
               span.caption1-slide1.txt1.t-center.animated.visible-false.m-b-15(data-appear='fadeInDown')=item.sub_title 
@@ -13,29 +13,46 @@ block content
               .wrap-btn-slide1.animated.visible-false(data-appear='zoomIn')
     .wrap-slick1-dots
   .header-intro.parallax100.t-center.p-t-24.p-b-24(style="background-image: url(images/premier-room.jpg);",id="book")
-        form.wrap-form-booking(action="/room/search",method='POST')
+        form.wrap-form-booking(action="/room/search", method='GET')
           input(type='hidden', name='_csrf', value=_csrf)
-          .d-inline-flex.p-2
-            span.txt6(style="padding-right: 15px;") Ngày đến
-                .wrap-inputdate.pos-relative.txt10.size12.bo2.bo-rad-10.m-t-3.m-b-23
-                  input.my-calendar.bo-rad-10.sizefull.txt10.p-l-20(type="text", name="checkin", data-date-format="mm/dd/yyyy")
-                  i.btn-calendar.fa.fa-calendar.ab-r-m.hov-pointer.m-r-18(aria-hidden="true")
-            span.txt6 Ngày đi
-                .wrap-inputdate.pos-relative.txt10.size12.bo2.bo-rad-10.m-t-3.m-b-23
-                  input.my-calendar.bo-rad-10.sizefull.txt10.p-l-20(type="text", name="checkout", data-date-format="mm/dd/yyyy")
-                  i.btn-calendar.fa.fa-calendar.ab-r-m.hov-pointer.m-r-18(aria-hidden="true")  
+          .container-fluid
           .d-inline-flex.p-2 
-            span.txt6(style="padding-right: 15px; width: 190px;") Loại phòng
-                .wrap-inputdate.pos-relative.txt10.size12.bo2.bo-rad-10.m-t-3.m-b-23
-                  select.selection-1(name="room_type",id="type")
-                    each item in dataroom.room  
-                      option(value=item.type)=item.type
-            span.txt6(style="padding-right: 15px; width: 190px; padding-top: 22px !important;") 
-                button.btn3.flex-c-m.size13.txt11.trans-0-4(type="submit") Tìm kiếm
+            .row
+              .col-xs-12.col-sm-3
+                .box
+                  .row.form-group
+                    label.col-lg-4.txt6 Ngày đến
+                    .col-lg-8.input-group.date.datetimepicker1
+                      input.form-control(type='text', name='checkin')
+                      span.input-group-addon
+                        span.glyphicon.glyphicon-calendar
+              .col-xs-12.col-sm-3
+                .box
+                  .row.form-group
+                    label.col-lg-4.txt6 Ngày đi
+                    .col-lg-8.input-group.date.datetimepicker1
+                      input.form-control(type='text', name='checkout')
+                      span.input-group-addon
+                        span.glyphicon.glyphicon-calendar
+              .col-xs-12.col-sm-3
+                .box
+                  .row.form-group
+                    label.col-lg-4.txt6 Loại phòng
+                    .col-lg-8
+                      select.selection-1(name="room_type")
+                        option(value='', selected='') Chọn loại phòng
+                        if typeof(dataroom)!= "undefined"   
+                          each item in dataroom  
+                            option= item.type.type
+              .col-xs-12.col-sm-3
+                .box
+                  .row.form-group
+                    button.btn3.flex-c-m.size13.txt11.trans-0-4(type="submit") Tìm kiếm
+              
   section.bg1-pattern.p-t-60.p-b-40
-   if typeof(dataroom.room)!= "undefined" 
+   if typeof(dataroom)!= "undefined" 
     .container
-    each item,index in dataroom.room
+    each item,index in dataroom
      if index %2 == 0   
       .row(id=index)
         .col-md-6.p-t-45.p-b-30
@@ -44,7 +61,7 @@ block content
             span.tit2.t-center
               | #{item.name} ||  
             span.tit2.t-center
-              | #{item.type}
+              | #{item.type.type}
             h3.tit7.t-center.m-b-35.m-t-5
               | #{item.convenient}
             p.t-center.m-b-22.size3.m-l-r-auto
@@ -73,7 +90,7 @@ block content
             h3.tit7.t-center.m-b-35.m-t-5
               | #{item.convenient}
             p.t-center.m-b-22.size3.m-l-r-auto
-              | Có diện tích: #{item.area} m², Số giường ngủ: #{item.amount_bed}, Số người tối đa : #{item.occupancy}  
+              | Có diện tích: #{item.area} m², Số giường ngủ:  #{item.amount_bed}, Số người tối đa : #{item.occupancy}  
             p.t-center.m-b-22.size3.m-l-r-auto(style="word-wrap: break-word")
               | #{item.description}
             p.t-center.m-b-22.size3.m-l-r-auto.tit2 

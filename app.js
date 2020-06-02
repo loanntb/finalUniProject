@@ -46,6 +46,8 @@ dotenv.load({ path: '.env.example' });
  */
 const homeController = require('./controllers/homeController');
 const roomController = require('./controllers/roomController');
+const typeRoomController = require('./controllers/typeRoomController');
+const bookRoomController = require('./controllers/bookRoomController');
 const menuController = require('./controllers/menuController');
 const userController = require('./controllers/userController');
 const apiController = require('./controllers/api');
@@ -106,7 +108,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use((req, res, next) => {
-  var arr=['/api/upload','/pages/home/slide','/pages/home/welcome','/pages/home/intro','/pages/room','/pages/room/delete','/pages/contact','/pages/contact/delete','/contact','/pages/cafe/slide','/pages/book/room/delete','/pages/tuyendung/slide'];
+  var arr=['/api/upload','/pages/home/slide','/pages/home/welcome','/pages/home/intro','/pages/room','/pages/room/delete','/pages/typeroom','/pages/typeroom/delete','/pages/contact','/pages/contact/delete','/contact','/pages/cafe/slide'];
   if ( arr.indexOf(req.path) != -1) {
     next();
   } else {
@@ -151,6 +153,8 @@ app.get('/', homeController.index);
 app.get('/menu', menuController.menu);
 app.get('/room', roomController.homepage);
 app.get('/cafe', cafeController.getHome);
+//app.get('/room/search', roomController.getSearchPage);
+//app.get('/room/search', roomController.postSearchPage);
 app.get('/booking/:id', roomController.getbookID);
 app.post('/booking', menuController.postHomeBookTable);
 app.get('/login', userController.getLogin);
@@ -184,6 +188,10 @@ app.post('/pages/home/intro/delete',passportConfig.isAuthenticated, homeControll
 app.get('/pages/room', passportConfig.isAuthenticated,roomController.index);
 app.post('/pages/room',upload.single('room'),passportConfig.isAuthenticated,roomController.postHomeRoom);
 app.post('/pages/room/delete',passportConfig.isAuthenticated, roomController.deleteHomeRoom);
+//type room
+app.get('/pages/typeroom', passportConfig.isAuthenticated,typeRoomController.index);
+app.post('/pages/typeroom',upload.single('typeroom'),passportConfig.isAuthenticated,typeRoomController.postHomeRoom);
+app.post('/pages/typeroom/delete',passportConfig.isAuthenticated, typeRoomController.deleteHomeRoom);
 //menu
 app.get('/pages/menu',passportConfig.isAuthenticated,menuController.index);
 app.post('/pages/menu',passportConfig.isAuthenticated,menuController.postMenu);
@@ -191,9 +199,9 @@ app.post('/pages/menu/delete',passportConfig.isAuthenticated, menuController.del
 //book
 app.get('/pages/book/table/:page?',passportConfig.isAuthenticated, menuController.getbook);
 app.post('/pages/book/table/delete',passportConfig.isAuthenticated, menuController.deleteBookTable);
-app.get('/pages/book/room/:page?',passportConfig.isAuthenticated, roomController.getbook);
-app.post('/pages/book/room/',passportConfig.isAuthenticated, roomController.postBookRoom);
-app.post('/pages/book/room/delete',passportConfig.isAuthenticated, roomController.deleteBookRoom);
+app.get('/pages/book/room/:page?',passportConfig.isAuthenticated, bookRoomController.getbook);
+app.post('/pages/book/room/',passportConfig.isAuthenticated, bookRoomController.postBookRoom);
+app.post('/pages/book/room/delete',passportConfig.isAuthenticated, bookRoomController.deleteBookRoom);
 //contact
 app.get('/pages/contact',passportConfig.isAuthenticated, contactController.index);
 app.post('/pages/contact',upload.single('contact'),passportConfig.isAuthenticated, contactController.postHomeContact);
@@ -216,8 +224,6 @@ app.post('/pages/tuyendung/info',passportConfig.isAuthenticated, TuyendungContro
  * API examples routes.
  */
 app.get('/api', apiController.getApi);
-
-
 
 app.get('/api/facebook', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getFacebook);
 app.get('/api/upload', apiController.getFileUpload);
