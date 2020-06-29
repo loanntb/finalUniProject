@@ -1,0 +1,31 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title #{title}-Quản lý khách sạn
+    link(rel='stylesheet', href='/admin/vendor/bootstrap/bootstrap.min.css')
+    link(rel='stylesheet', href='/fonts/font-awesome-4.7.0/css/font-awesome.min.css')
+    link(rel='stylesheet', href='/admin/css/AdminLTE.min.css')
+    link(rel='stylesheet', href='/admin/vendor/iCheck/square/blue.css')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic')
+
+  body.hold-transition.register-page
+    .register-box
+      .register-logo
+        a(href="/") Quản lý Khách Sạn 
+      .register-box-body
+        p.login-box-msg Quên mật khẩu
+        include ../partials/flash
+        form(action='/forgot', method="post")
+          input(type='hidden', name='_csrf', value=_csrf)
+          .form-group.has-feedback
+            input.form-control(type="email", name="email", id='email', placeholder="Email", autofocus, autocomplete='email', required)
+            span.fa.fa-envelope.form-control-feedback
+          .row
+            .col-xs-4
+              button.btn.btn-primary(type="submit")
+               | Thay đổi mật khẩu
+    script(src='/vendor/jquery/jquery-3.2.1.min.js')
+    script(src='/admin/vendor/bootstrap/bootstrap.min.js')
+    

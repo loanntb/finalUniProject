@@ -1,0 +1,79 @@
+extends ../admin_layout
+block content
+  section.content-header
+    h1 Loại phòng
+    ol.breadcrumb
+      li
+        a(href="/")
+          i.fa.fa-dashboard
+          | Home
+      li.active Loại phòng
+
+  section.content             
+    .row
+      .col-md-12
+              .box.box-success
+                .box-header.with-border
+                  h3.box-title Loại phòng
+                form(action='/pages/typeroom', method='POST', enctype='multipart/form-data')
+                  input(type='hidden', name='_csrf', value=_csrf)
+                  input(type='hidden',id="link", name='img')
+                  input(type='hidden',id="link1", name='id')
+                  .box-body
+                    .form-group
+                      label(for="description") Tên loại phòng 
+                      input.form-control(type="text", id="name", name="name", autocomplete='name')
+                    .form-group
+                      label(for="description") Mô tả
+                      input.form-control(type="text", id="description", name="description", autocomplete='description')
+                    .form-group
+                        <label for="exampleInputFile">Chọn ảnh</label>
+                        <input type="file" id="welcome" name="room">
+                        <p class="help-block">Kích thước ảnh: 720 x 959</p>
+                        img(src="",class="img-responsive hidden",id="img",style="width: 400px;height: 300px;", alt="")
+                  .box-footer
+                    button.btn.btn-primary(type="submit")
+                      i.fa.fa-save.p-r-5
+                      | Submit     
+      .col-md-12       
+          .box.box-info
+            .box-body.table-responsive.no-padding
+                    <table class="table table-hover ">
+                     
+                      <tr>
+            
+                          <th>Tên loại phòng</th>
+                          <th>Mô tả</th>
+                          <th>Ảnh</th>
+                          <th></th>
+                      </tr>
+                      if typeof(data)!= "undefined" 
+                        - var i=0 
+                        each item, index in data  
+                            tr
+                        
+                              td= item.name                          
+                              td= item.description
+                              td
+                                img(class="img-thumbnail" ,style="width: 50px;height: 50px;", src=item.image)
+                             
+                              td
+                                button(class='btn btn-danger' onclick="deleteRoom("+i+")" ) 
+                                  <i class="fa fa-trash"></i>
+                                - i++;
+                      else
+                            tr 
+                              .alert.alert-warning
+                                  strong Cảnh báo!
+                                  |  Không có dữ liệu. 
+                    </table>      
+                    form(action='pages/typeroom/delete',class="visible", method='POST',id="senddata2")
+                      input(type='hidden', name='_csrf', value=_csrf)
+                      input(type='hidden', name='id',id="imgurl2")
+                      input(type='hidden', name='page_number',value=page_number?page_number:0)
+                    script(type='text/javascript').
+                          function deleteRoom(id){
+                            $('#imgurl2').val(id);
+                            $( "#senddata2" ).submit();
+                              };
+                    

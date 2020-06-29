@@ -1,0 +1,114 @@
+aside.main-sidebar
+  section.sidebar
+    ul.sidebar-menu(data-widget="tree")
+      li.header Danh mục 
+      li.active
+        a(href="/account")
+          i.fa.fa-user
+          span Hồ sơ
+
+      li.treeview
+        a(href="#")
+          i.fa.fa-book
+          span Đặt
+          span.pull-right-container
+            i.fa.fa-angle-left.pull-right
+        ul.treeview-menu
+          li
+            a(href="/pages/book/room")
+              i.fa.fa-circle-o.text-red
+              | Phòng
+           
+      if user.role ==='Receptionist'
+        li.treeview
+          a(href="#")
+            i.fa.fa-book
+            span Quản lý
+            span.pull-right-container
+              i.fa.fa-angle-left.pull-right
+        
+        li
+          a(href="/pages/book/room")
+            i.fa.fa-circle-o.text-red
+            | Phòng
+      if user.role ==='Admin'
+        li.treeview
+          a(href="#")
+            i.fa.fa-book
+            span Báo cáo
+            span.pull-right-container
+              i.fa.fa-angle-left.pull-right
+          ul.treeview-menu
+            li
+              a(href="/pages/statistical")
+                i.fa.fa-circle-o.text-red
+                | Thống Kê
+            li
+              a(href="/pages/book/table")
+                i.fa.fa-circle-o.text-red
+                | Doanh Thu
+
+        li.treeview
+          a(href="#")
+            i.fa.fa-book
+            span Quản lý
+            span.pull-right-container
+              i.fa.fa-angle-left.pull-right
+          ul.treeview-menu
+            li
+              a(href="/pages/account")
+                i.fa.fa-circle-o.text-red
+                | Tài khoản
+            li
+              a(href="/mannagement/shift")
+                i.fa.fa-circle-o.text-red
+                | Ca làm   
+            li
+              a(href="/pages/email")
+                i.fa.fa-circle-o.text-red
+                | Email 
+            li
+              a(href="/mannagement/listroom")
+                i.fa.fa-circle-o.text-red
+                | Phòng                 
+        li.treeview
+          a(href="/")
+            i.fa.fa-book
+            span Trang
+            span.pull-right-container
+              i.fa.fa-angle-left.pull-right
+          ul.treeview-menu
+            li
+              a(href="/pages/home")
+                i.fa.fa-circle-o.text-red
+                | Trang chủ
+            li
+              a(href="/pages/room")
+                i.fa.fa-circle-o.text-red
+                | Phòng
+            li
+              a(href="/pages/typeroom")
+                i.fa.fa-circle-o.text-red
+                | Loại Phòng  
+            li
+              a(href="/pages/menu")
+                i.fa.fa-circle-o.text-red
+                | Nhà hàng
+            li
+              a(href="/pages/bar")
+                i.fa.fa-circle-o.text-red
+                | Bar  
+            li
+              a(href="/pages/contact")
+                i.fa.fa-circle-o.text-red
+                | Liên hệ  
+            li
+              a(href="/pages/tuyendung")
+                i.fa.fa-circle-o.text-red
+                | Tuyển dụng           
+      li
+        a(href="/logout")
+          i.fa.fa-sign-out
+          span Đăng xuất
+
+

@@ -1,0 +1,107 @@
+extends layout  
+
+block content
+  // ================Breadcrumb Area =================
+  section.breadcrumb_area
+    .overlay.bg-parallax(data-stellar-ratio='0.8', data-stellar-vertical-offset='0', data-background='')
+    .container
+      .page-cover.text-center
+        h2.page-cover-tittle Phòng
+        ol.breadcrumb
+          li
+            a(href='/') Trang chủ
+          li.active Phòng
+  // ================Room Details =================
+  section.blog_area.single-post-area
+    if typeof(roomId)!= "undefined"
+      .container
+        .row
+          .col-lg-8.posts-list
+            .single-post.row
+              .col-lg-12
+                .feature-img
+                  img.img-fluid(src=roomId.image?roomId.image:'', alt='')
+              .col-lg-3.col-md-3
+                .blog_info.text-right
+                  .post_tag
+                    p 
+                      | Số giường:  #{roomId.bed}
+
+                    p 
+                      | Diện tích: #{roomId.size} 
+                    p
+                      | Số lượng người tối đa:  #{roomId.people}
+
+              .col-lg-9.col-md-9.blog_details
+                h2 #{roomId.name} 
+                p.excert
+                  | #{roomId.description}
+                p
+                  | #{roomId.convenient}
+                p
+                  | #{roomId.floor}
+              .col-lg-12
+                .quotes
+                  | #{roomId.view}
+
+          .col-lg-4
+            .blog_right_sidebar
+              aside.single_sidebar_widget.post_category_widget
+                h4.widget_title Loại phòng
+                ul.list_style.cat-list
+                  if typeof(type)!= "undefined"  
+                    each item in type
+                      li
+                        a.d-flex.justify-content-between(href="/category/"+item._id+"")
+                          p #{item.name}
+
+
+
+  // ================Booking Tabel Area =================
+  section.hotel_booking_area(style='margin-bottom: 50px;')
+    .container
+      form(action="/pages/search/book/room",method='POST')
+        input(type='hidden', name='_csrf', value=_csrf)
+        .row.hotel_booking_table
+          .col-md-3
+            h2
+              | Đặt
+              br
+              |  Phòng
+          .col-md-9
+            .boking_table
+              .row
+                .col-md-4
+                  .book_tabel_item
+                    .form-group
+                      #datetimepicker11.input-group.date
+                        input.form-control(type='text', placeholder='Ngày đến', name="checkin")
+                        span.input-group-addon
+                          i.fa.fa-calendar(aria-hidden='true')
+                    .form-group
+                      #datetimepicker1.input-group.date
+                        input.form-control(type='text', placeholder='Ngày đi', name="checkout")
+                        span.input-group-addon
+                          i.fa.fa-calendar(aria-hidden='true')
+                .col-md-4
+                  .book_tabel_item
+                    .input-group
+                      select(name="people",id="people").wide
+                        option(data-display='Số lượng người') 
+                        -for(var i = 1;i <= roomId.people;i++){
+                          option(value=i) #{i}
+                        -}
+                    input.single-input(type='email', name='email', placeholder='Email', onfocus="this.placeholder = ''", onblur="this.placeholder = 'email'", required='') 
+                .col-md-4
+                  .row.form-group(style='display: none;')
+                    label.col-lg-4.txt6 Gía tiền
+                    .col-lg-8
+                      select.selection-1(name="price",id="price")
+                        option(value= roomId.price selected)=roomId.price
+                  .row.form-group(style='display: none;')
+                    label.col-lg-4.txt6 Gía tiền
+                    .col-lg-8
+                      select.selection-1(name="name",id="name")
+                        option(value= roomId._id selected)=roomId.price
+                  button(type="submit").book_now_btn.button_hover Đặt phòng
+      // ================Booking Tabel Area  =================

@@ -1,0 +1,58 @@
+extends ../admin_layout
+block content
+  section.content-header
+    h1 Trang phòng
+    ol.breadcrumb
+      li
+        a(href="/")
+          i.fa.fa-dashboard
+          | Home
+      li.active Trang chủ
+
+  section.content         
+    .row
+        .col-md-12
+            .box.box-success
+                .box-header.with-border
+                  h3.box-title Danh sách phòng
+                  .col-md-4
+                  .book_tabel_item
+                   form(action="/mannagement/booklistroom", method='POST')
+                    input(type='hidden', name='_csrf', value=_csrf)
+                    span(style='display: flex; margin-left: 183px; margin-bottom: 20px; margin-top: 20px;')
+                      #datetimepicker11.input-group.date
+                        input.form-control(type='date', placeholder='Ngày đến', name='checkin', style='    display: flex;    ')
+                        
+                      #datetimepicker1.input-group.date
+                        input.form-control(type='date', placeholder='Ngày đi', name='checkout')
+                        
+                      div
+                        button.btn.btn-primary(type='submit', style='margin-left: 20px;') Tìm kiếm
+                .box-body.table-responsive.no-padding
+                    <table class="table table-hover ">
+                     <thead>
+                      <tr>
+                        <th>Tên phòng</th>
+                        <th>Ảnh</th>
+                        <th>Loại phòng</th>
+                        <th>Mô tả</th>
+                       
+                        <th></th>
+                      </tr>
+                      </thead> 
+                      <tbody>
+                      - var i=0
+                    if typeof(data)!= "undefined"
+                      each item in data    
+                          tr
+                            td= item.name                       
+                          
+                            td
+                              img(class="img-thumbnail" ,style="width: 50px;height: 50px;", src=item.image)
+                            td= item.type.name
+                            td= item.description
+                            
+                    <tbody>        
+                    </table>
+
+                

@@ -1,0 +1,64 @@
+extends ../admin_layout
+block content
+  section.content-header
+    h1  Danh sách đặt bàn
+    ol.breadcrumb
+      li
+        a(href="/")
+          i.fa.fa-dashboard
+          | Home
+      li.active Trang chủ
+
+  section.content             
+    .row 
+      .col-md-12       
+          .box.box-info
+            .box-header.with-border
+            .box-body.table-responsive.no-padding
+                    <table class="table table-hover ">
+                      thead
+                      <tr>
+                          <th>Ngày</th>
+                          <th>Thời gian</th>
+                          <th>Tên</th>
+                          <th>Điện thoại</th>
+                          <th>Email</th>
+                          <th>Số người</th>
+                          <th>Hành động</th>
+                      </tr> 
+                      tbody 
+                        if typeof(data.book)!= "undefined"      
+                            - var i=0
+                            each item in data.book    
+                                tr
+                                  td= item.date
+                                  td= item.time
+                                  td= item.name
+                                  td= item.phone
+                                  td= item.email
+                                  td= item.people
+                                  td
+                                    #delete 
+                                      button(class='btn btn-danger' onclick="deleteRoom("+i+")"  ) 
+                                        <i class="fa fa-trash"></i>
+                                    - i++;
+                        else
+                              tr 
+                                      .alert.alert-warning
+                                          strong  Cảnh báo!
+                                          |  Không có dữ liệu.        
+                    </table>
+                    form(action='/pages/book/table/delete',class="visible", method='POST',id="senddata2")
+                      input(type='hidden', name='_csrf', value=_csrf)
+                      input(type='hidden', name='id',id="imgurl2")
+                      input(type='hidden', name='page_number',value=page_number?page_number:0)
+                   
+
+                    script(type='text/javascript').
+                          function deleteRoom(id){
+                            $('#imgurl2').val(id);
+                            $( "#senddata2" ).submit();
+                              };
+                    .dataTables_info(role='status', aria-live='polite') Hiển thị #{parseInt(page_number)*10+ data.book.length==0?0:1} đến #{parseInt(page_number)*10+data.book.length} của #{count} trang            
+                    if count > 1
+                      include admin_pagination            

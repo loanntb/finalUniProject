@@ -1,0 +1,61 @@
+extends ../admin_layout
+block content
+  section.content-header
+    h1 Danh sách đặt phòng
+    ol.breadcrumb
+      li
+        a(href="/")
+          i.fa.fa-dashboard
+          | Home
+      li.active Trang chủ
+
+  section.content             
+    .row 
+      .col-md-12       
+          .box.box-info
+            .box-body.table-responsive.no-padding
+                    <table class="table table-hover ">
+                     
+                      <tr>
+            
+                        <th>Tên Phòng</th>
+                        <th>Ngày đặt phòng </th>
+                        <th>Ngày trả phòng</th>
+                        <th>Email</th>
+                        <th>Hành động</th>
+                      </tr>
+                      if typeof(data)!= "undefined" 
+                        - var i=0 
+                        each item, index in data  
+                            tr
+                        
+                              td= item.roomId.name
+                              td= item.checkin
+                              td= item.checkout
+                               td= item.email
+                             
+                              td
+                                a(href="" )
+                                  button(class='btn btn-success' ) 
+                                    <i class="fa fa-pencil-square-o"></i>
+                                button(class='btn btn-danger' onclick="deleteRoom("+i+")" ) 
+                                  <i class="fa fa-trash"></i>
+                                - i++;
+                      else
+                            tr 
+                              .alert.alert-warning
+                                  strong Cảnh báo!
+                                  |  Không có dữ liệu. 
+                    </table>      
+                    form(action='/pages/book/room/delete',class="visible", method='POST',id="senddata2")
+                      input(type='hidden', name='_csrf', value=_csrf)
+                      input(type='hidden', name='id',id="imgurl2")
+                      input(type='hidden', name='page_number',value=page_number?page_number:0)
+                    script(type='text/javascript').
+                          function deleteRoom(id){
+                            $('#imgurl2').val(id);
+                            $( "#senddata2" ).submit();
+                              };
+            .dataTables_info(role='status', aria-live='polite') Hiển thị #{parseInt(page_number)*10+ data.length==0?0:1} đến #{parseInt(page_number)*10+data.length} của #{count} trang           
+            if count > 1
+              include admin_pagination                   

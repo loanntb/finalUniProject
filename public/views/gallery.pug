@@ -1,0 +1,26 @@
+extends layout  
+
+block content
+  section.breadcrumb_area.blog_banner_two
+    .overlay.bg-parallax(data-stellar-ratio='0.8', data-stellar-vertical-offset='0', data-background='')
+    .container
+      .page-cover.text-center
+        h2.page-cover-tittle.f_48 Ảnh
+        ol.breadcrumb
+          li
+            a(href='/') Trang chủ
+          li.active Gallery
+  // ================Breadcrumb Area =================
+  section.gallery_area.section_gap
+    .container
+      .section_title.text-center
+        h2.title_color Royal Hotel Gallery
+          p Những bức ảnh đẹp mê ly của khách sạn.
+            if typeof(data)!= "undefined" 
+              .row.gallery-item
+                 each item in data
+                  .col-md-4
+                    a.img-gal(href=item.image?item.image:'')
+                      .single-gallery-image(style='background: url('+item.image+');')
+  
+                    

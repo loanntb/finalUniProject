@@ -1,0 +1,33 @@
+extends layout  
+
+block content
+  // ================Breadcrumb Area =================
+  section.breadcrumb_area
+    .overlay.bg-parallax(data-stellar-ratio='0.8', data-stellar-vertical-offset='0', data-background='')
+    .container
+      .page-cover.text-center
+        h2.page-cover-tittle Phòng
+        ol.breadcrumb
+          li
+            a(href='/') Trang chủ
+          li.active Phòng
+  // ================ Accomodation Area  =================
+  section.accomodation_area.section_gap
+    .container
+      .section_title.text-center
+        h2.title_color Danh sách phòng
+        p
+          | Không gian thư thái giành cho quý khách
+    if typeof(dataroom)!= "undefined" 
+      .row.accomodation_two
+        each item in dataroom
+          .col-lg-3.col-sm-6
+            .accomodation_item.text-center
+              .hotel_img
+                img(src=item.image?item.image:'', alt="IMG-room", style="width: 360px;height: 214px;")
+                a.btn.theme_btn.button_hover(href="/booking/"+item._id+"") Đặt phòng
+              a(href="/booking/"+item._id+"")
+                h4.sec_h4 #{item.name}
+              h5
+                | #{item.price.toLocaleString('Vn')}
+                small /đêm

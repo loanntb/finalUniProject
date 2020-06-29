@@ -1,0 +1,39 @@
+
+header.header_area
+  .container
+    nav.navbar.navbar-expand-lg.navbar-light
+      // Brand and toggle get grouped for better mobile display
+      a.navbar-brand.logo_h(href='/')
+        img(src='/roomLayout/image/logo-2.png', alt='logo')
+      button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      // Collect the nav links, forms, and other content for toggling
+      #navbarSupportedContent.collapse.navbar-collapse.offset
+        ul.nav.navbar-nav.menu_nav.ml-auto
+          li.nav-item
+            a.nav-link(href='/') Trang chủ
+          li.nav-item
+            a.nav-link(href='/room') Phòng
+          li.nav-item
+            a.nav-link(href='/gallery') Gallery
+          li.nav-item.submenu.dropdown
+            a.nav-link.dropdown-toggle(href='/service', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false') Dịch vụ
+            ul.dropdown-menu
+              li.nav-item
+                a.nav-link(href='/service/bar') Bar
+              li.nav-item
+                a.nav-link(href='/service/menu') Nhà hàng
+          li.nav-item
+            a.nav-link(href='/tuyendung') Tuyển dụng
+          li.nav-item
+            a.nav-link(href='/contact') Liên hệ
+          if !user
+            li.nav-item
+              a.nav-link(href='/login') Đăng nhập
+          else
+            li.nav-item
+              a.nav-link(href='/account') My Account  
+            li.nav-item
+              a.nav-link(href='/logout') Đăng xuất  

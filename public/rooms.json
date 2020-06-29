@@ -1,0 +1,32 @@
+[
+  {
+    "_id": {
+      "$oid": "5ed5c6bb7928212fac3e6910"
+    },
+    "occupancy": "2",
+    "status": "empty",
+    "name": "B1_101",
+    "floor": "Tầng 1",
+    "types": [
+      {
+        "$oid": "5eda48789ae5424ed0859e76"
+      },
+      {
+        "$oid": "5eda48789ae5424ed0859e77"
+      },
+      {
+        "$oid": "5eda48789ae5424ed0859e78"
+      },
+      {
+        "$oid": "5eda48789ae5424ed0859e79"
+      }
+    ],
+    "convenient": "máy sấy, tủ quần áo, wifi",
+    "description": "Phòng tuy nhỏ nhưng có view đẹp, phù hợp với giá thành",
+    "area": "25",
+    "amount_bed": "1",
+    "image": "/uploads/room-1591068347322.jpg",
+    "__v": 0
+  }
+]
+total_price: 400000

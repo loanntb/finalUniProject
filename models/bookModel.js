@@ -10,7 +10,6 @@ const roombookSchema = new mongoose.Schema({
     total_price: Number,
     phone:String,
     email:String,
-    identity_card:String,
     status: {type: String, default: 'ordered'},
     roomId: { type: Schema.ObjectId, ref: 'room' }
 });

@@ -1,0 +1,73 @@
+
+extends layout
+
+block content
+  section.breadcrumb_area.blog_banner_two
+    .overlay.bg-parallax(data-stellar-ratio='0.8', data-stellar-vertical-offset='0', data-background='')
+    .container
+      .page-cover.text-center
+        h2.page-cover-tittle.f_48 Thông tin liên hệ
+        ol.breadcrumb
+          li
+            a(href='/') Trang chủ
+          li.active Liên hệ
+  if data.info
+  section.contact_area.section_gap
+    .container
+      h3.mb-30.title_color 
+            a(href="/") Giới thiệu
+      .t-center.m-l-r-auto(style="padding: 0 20% 0 20%; margin-bottom: 33px;") !{data.info.description}
+      .gmap_canvas
+        iframe#gmap_canvas(width='997', height='500', src='https://maps.google.com/maps?q='+data.info.address+'&t=&z=13&ie=UTF8&iwloc=&output=embed', frameborder='0', scrolling='no', marginheight='0', marginwidth='0')
+      style.
+        .gmap_canvas {overflow:hidden;background:none!important;height:500px;width:997px;margin: auto;}
+      .row(style='margin-top: 20px !important;')
+        .col-md-3
+          .contact_info
+            .info_item
+              i.lnr.lnr-home
+              h6 Vị trí
+              p #{data.info.address}
+            .info_item
+              i.lnr.lnr-phone-handset
+              h6
+                a(href='#') #{data.info.phone}
+              p #{data.info.openhour}
+            .info_item
+              i.lnr.lnr-envelope
+              h6
+                a(href='https://mail.google.com/mail/u/0/') #{data.info.email}
+              p Gửi tin nhắn cho chúng tôi bất kỳ lúc nào!
+        .col-md-9
+          form#contactForm.row.contact_form(action='/contact', method='post', novalidate='novalidate')
+            .col-md-6
+              .form-group
+                input#name.form-control(type='text', name='name', placeholder='Tên')
+              .form-group
+                input#email.form-control(type='email', name='email', placeholder=' Email ')
+            .col-md-6
+              .form-group
+                textarea#message.form-control(name='message', rows='5', placeholder=' Message')
+            .col-md-12.text-right
+              button.btn.theme_btn.button_hover(type='submit', value='submit') Gửi tin nhắn
+  // ================Contact Area =================
+  
+  // ================Contact Success and Error message Area =================
+  #success.modal.modal-message.fade(role='dialog')
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            i.fa.fa-close
+          h2 Cảm ơn
+          p Tin nhắn của bạn đã được gửi đi...
+  // Modals error
+  #error.modal.modal-message.fade(role='dialog')
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            i.fa.fa-close
+          h2 Xin lỗi !
+          p  Đã có lỗi xảy ra
+  // ================End Contact Success and Error message Area =================

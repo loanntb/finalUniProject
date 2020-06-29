@@ -1,0 +1,41 @@
+extends layout
+
+block content
+  section.breadcrumb_area.blog_banner_two
+    .overlay.bg-parallax(data-stellar-ratio='0.8', data-stellar-vertical-offset='0', data-background='')
+    .container
+    .page-cover.text-center
+      h2.page-cover-tittle.f_48 Quầy bar
+      ol.breadcrumb
+        li
+          a(href='/') Trang chủ
+        li
+          a(href='/service') Dịch vụ
+        li.active Bar
+
+  // ================Breadcrumb Area =================
+  // Start Sample Area
+  section.sample-text-area
+    .container
+      .section-top-border
+        h3.mb-30.title_color Bar
+        .row
+          .col-lg-12
+            blockquote.generic-blockquote
+              | “Nơi khách hàng lui tới để thư giãn, thưởng thức các loại rượu, Cocktail và trò chuyện cùng nhau.”
+            span
+             .info_item
+               span.i.lnr.lnr-home(style='padding-right: 15px;')    #{data.info.address}
+               span.i.lnr.lnr-phone-handset   #{data.info.phone}
+  .whole-wrap
+    .container
+      .section-top-border
+        h3.title_color Hình ảnh
+          if typeof(data.slides)!= "undefined" 
+            each item in data.slides
+              .row.gallery-item
+                .col-md-4
+                  a.img-gal(href='/service/bar')
+                    .single-gallery-image(style='background: url('+item.image+');')
+ 
+  

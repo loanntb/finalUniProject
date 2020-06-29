@@ -1,0 +1,106 @@
+(module.exports = {
+  "extends": ["eslint:recommended", "prettier", "prettier/react"],
+  "parser": "babel-eslint",
+  "env": {
+    "node": true,
+    "browser": true,
+    "es6": true
+  },
+  "plugins": ["react", "sort-imports-es6-autofix", "import", "prettier"],
+  "rules": {
+    "react/jsx-uses-react": 1,
+    "react/jsx-uses-vars": 1,
+    "react/react-in-jsx-scope": 1,
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".js", ".jsx"]
+      }
+    ],
+    "constructor-super": "warn",
+    // "import/imports-first": ["error", "absolute-first"],
+    "import/newline-after-import": "error",
+    "indent": [0, 2],
+    "no-const-assign": "warn",
+    "no-extra-semi": "error",
+    "no-this-before-super": "warn",
+    "no-undef": "warn",
+    "no-underscore-dangle": 0,
+    "no-unreachable": "warn",
+    "no-unused-vars": "error",
+    "quotes": ["error", "single"],
+    "semi": ["error", "always"],
+    "valid-typeof": "warn",
+    "consistent-return": "off",
+    "flowtype/no-types-missing-file-annotation": "off",
+    "import/extensions": "off",
+    "import/no-unresolved": 2,
+    "import/no-named-as-default": "off",
+    "import/no-named-as-default-member": "off",
+    "import/prefer-default-export": "off",
+    "react/default-props-match-prop-types": "off",
+    "react/forbid-prop-types": "off",
+    "react/jsx-closing-tag-location": "off",
+    "react/no-string-refs": "off",
+    "react/no-unused-prop-types": "off",
+    "react/no-unused-state": "off",
+    "react/prefer-stateless-function": "off",
+    "react/prop-types": "off",
+    "react/require-default-props": "off",
+    "react/sort-comp": "off",
+    "max-len": "off",
+    "no-case-declarations": "off",
+    "no-console": "warn",
+    "no-mixed-operators": "off",
+    "no-nested-ternary": "off",
+    "no-shadow": "off",
+    "no-use-before-define": 1,
+    "no-unused-expressions": 0,
+    "prefer-promise-reject-errors": "off",
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 1,
+        "maxEOF": 1
+      }
+    ],
+    "prettier/prettier": [
+      "off",
+      {
+        "trailingComma": "none",
+        "singleQuote": false,
+        "jsxSingleQuote": false
+        // "printWidth": 100
+        // "semi": true
+        // "jsxBracketSameLine": true
+      }
+    ]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": [
+          "./src",
+          "./src/lib/",
+          "./src/res/",
+          "./src/core/",
+          "./src/screens/",
+          "./src/store/",
+          "./src/routers/",
+          "./src/config/",
+          "./src/utils/"
+        ],
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
+  "globals": {
+    "window": true,
+    "document": true,
+    "localStorage": true,
+    "FormData": true,
+    "FileReader": true,
+    "Blob": true,
+    "navigator": true
+  }
+})

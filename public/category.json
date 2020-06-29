@@ -1,0 +1,43 @@
+[
+  {
+    "name": "Phòng Standard (STD)",
+    "image": "/uploads/room-1591068347322.jpg",
+    "rooms": [
+      {
+        "$oid": "5edf45c482f56c1dd4c60625"
+      },
+      {
+        "$oid": "5edf45c482f56c1dd4c60626"
+      }
+    ],
+    "description": "Standard - phòng tiêu chuẩn trong khách sạn, là loại phòng đơn giản nhất với những trang bị tối thiểu, có diện tích nhỏ, ở tầng thấp, không có view hoặc view không đẹp. Đây là loại phòng có mức giá thấp nhất trong khách sạn. Một số khách sạn sẽ không có loại phòng standard vì tất cả các phòng đều có view đẹp và được trang bị những thiết bị tiện nghi nhất."
+  },
+  {
+    "name": "Phòng Superior (SUP)",
+    "image": "/uploads/room-1591068347322.jpg",
+    "rooms": [
+      {
+        "$oid": "5edf45c482f56c1dd4c60627"
+      },
+      {
+        "$oid": "5edf45c482f56c1dd4c60628"
+      }
+    ],
+    "description": "Đây là loại phòng có chất lượng cao hơn STD với diện tích lớn hơn, được trang bị nhiều trang thiết bị tiện nghi, có view đẹp. Vì chất lượng phòng tốt hơn nên mức giá thuê phòng Superior cũng sẽ cao hơn STD."
+  },
+  {
+    "name": "Phòng Deluxe (DLX)",
+    "image": "/uploads/room-1591068347322.jpg",
+    "description": "Loại phòng này thường ở trên tầng cao với chất lượng tốt hơn phòng Superior. Phòng Deluxe có diện tích rộng, có tầm nhìn đẹp với các trang thiết bị cao cấp và vì thế mà mức giá phòng DLX sẽ cao hơn SUP."
+  },
+  {
+    "name": "Phòng Suite (SUT)",
+    "image": "/uploads/room-1591068347322.jpg",
+    "description": "SUT là loại phòng cao cấp nhất trong khách sạn. Phòng suite thường ở trên tầng cao, được trang bị những thiết bị cao cấp và các dịch vụ đặc biệt kèm theo. Thường thì các khách sạn sẽ thiết kế phòng Suite có phòng khách và phòng ngủ riêng biệt, có ban công với view đẹp nhất khách sạn. Nhằm tăng thêm độ VIP để cho thuê với mức giá cao hơn, các khách sạn thường đặt tên cho loại phòng Suite: phòng Tổng thống (President room), phòng Hoàng gia (Royal Suite room),…"
+  },
+  {
+    "name": "Connecting room",
+    "image": "/uploads/room-1591068347322.jpg",
+    "description": "Loại phòng này khá đặc biệt, không nằm trong cách phân chia theo chất lượng phòng trong khách sạn. Phòng connecting room là hai phòng riêng biệt có cửa thông nhau. Loại phòng này thường được thiết kế dành cho đối tượng khách gia đình (phòng Family) hoặc khách nhóm (phòng Group)."
+  }
+]

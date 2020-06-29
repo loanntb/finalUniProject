@@ -1,0 +1,114 @@
+extends ../admin_layout
+block content
+  section.content-header
+    h1 Trang chủ
+    ol.breadcrumb
+      li
+        a(href="/")
+          i.fa.fa-dashboard
+          | Home
+      li.active Trang chủ
+
+  section.content    
+    .row 
+    .col-md-12   
+          .box.box-info
+            .box-header.with-border
+              h3.box-title Ca làm 
+            form(action='/mannagement/shift', method='POST', enctype='multipart/form-data')
+              input(type='hidden', name='_csrf', value=_csrf)
+              input(type='hidden',id="idShift", name='id')
+              .box-body
+                .form-group
+                  label(for="name") Tên ca làm 
+                  input.form-control(type="text", id="name", name="name", autocomplete='tên ca')
+                .form-group
+                  label(for="salary") Lương và hệ số lương
+                    .form-group(style="display: flex;")
+                        input.form-control(type="Number", id="salary", name="salary", placeholder="Lương")  
+                        input.form-control(type="Number",id="coefficient", name="coefficient", placeholder="Hệ số lương ") 
+                .form-group
+                    label(for="time") Thời gian làm việc
+                    .form-group(style="display: flex;")
+                        input.form-control(type="Number", id="timeStart", name="timeStart", placeholder="Thời gian bắt đầu làm việc")  
+                        input.form-control(type="Number",id="timeEnd",name="timeEnd",placeholder="Thời gian kết thúc ")
+              .box-footer
+                button.btn.btn-primary(type="submit")
+                  i.fa.fa-save.p-r-5
+                  | Submit
+    .row 
+    .col-md-12
+        .box.box-info
+            .box-header.with-border
+             h3.box-title Danh sách ca làm
+                .box-body.table-responsive.no-padding
+                    <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>Tên ca làm</th>
+                        <th>Lương</th>
+                        <th>Hệ số lương</th>
+                        <th>Thời gian bắt đầu</th>
+                        <th>Thời gian kết thúc</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody> 
+                      - var i=0
+                    if typeof(data)!= "undefined" 
+                      each item in data   
+                          tr
+                            td= item.name
+                            td= item.salary
+                            td= item.coefficient
+                            td= item.timeStart
+                            if item.timeStart = true
+                            td= item.is
+                            td 
+                                button(class='btn btn-success' onclick="editShift("+i+")") 
+                                    <i class="fa fa-pencil"></i>
+                                button(class='btn btn-danger' onclick="deleteShift("+i+")" ) 
+                                    <i class="fa fa-trash"></i>
+                                - i++;
+                              
+                                
+                    </tbody>      
+                    </table>
+
+                form(action='/mannagement/shift/delete',class="visible", method='POST',id="senddata1")
+                    input(type='hidden', name='_csrf', value=_csrf)
+                    input(type='hidden', name='id',id="imgurl1")
+
+                script(type='text/javascript').
+                    function deleteShift(id){
+                        $('#imgurl1').val(id);
+                        $( "#senddata1" ).submit();
+                    };
+
+                    function editShift(id){
+                        var arr=[#{data}];
+                        $('#name').val(arr[id]['name']);
+                        $('#salary').val(arr[id]['salary']); 
+                        $('#coefficient').val(arr[id]['coefficient']);
+                        $('#timeStart').val(arr[id]['timeStart']);
+                        $('#timeEnd').val(arr[id]['timeEnd']);
+                        $('#idShift').val(id);
+                    };             
+                
+                                                    
+                                
+
+                        
+                            
+                                
+                                
+                                
+                                    
+                        
+                        
+      
+      
+      
+
+                          
+           

@@ -1,0 +1,41 @@
+section.banner_area
+  .booking_table.d_flex.align-items-center
+    .overlay.bg-parallax(data-stellar-ratio='0.9', data-stellar-vertical-offset='0', data-background='')
+    .container
+      .banner_content.text-center
+        h6 Thư giãn tâm trí của bạn
+        h2 Royal Hotel Riverside
+        p
+          | Nơi nghỉ dưỡng sang trọng hoàn hảo cho kỳ nghỉ của bạn
+          br
+          |  Tại khách sạn Royal Hotel Riverside, chúng tôi phục vụ bằng cả trái tim!
+        a.btn.theme_btn.button_hover(href='/room') Đặt phòng
+  .hotel_booking_area.position
+    .container
+       form(action='/room/search', method='POST')
+          input(type='hidden', name='_csrf', value=_csrf)
+          .hotel_booking_table
+                .col-md-3
+                  h2
+                    | Tìm kiếm
+                    br
+                    |  Phòng
+                .col-md-9
+                  .boking_table
+                    .row
+                      .col-md-4
+                        .book_tabel_item
+                          .form-group
+                            #datetimepicker11.input-group.date
+                              input.form-control(type='text', placeholder='Thời gian đến', name = "checkin", id = "checkin")
+                              span.input-group-addon
+                                i.fa.fa-calendar(aria-hidden='true')
+                          .form-group
+                            #datetimepicker1.input-group.date
+                              input.form-control(type='text', placeholder='Thời gian đi', name="checkout", id = "checkout")
+                              span.input-group-addon
+                                i.fa.fa-calendar(aria-hidden='true')
+                      .col-md-4
+                        .book_tabel_item(style='margin-top: 20px;')
+                        button(type="submit").book_now_btn.button_hover Tìm kiếm
+// ================Banner Area =================

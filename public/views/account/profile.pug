@@ -1,0 +1,70 @@
+extends ../admin_layout
+block content
+  section.content-header
+    h1 Tài khoản
+    ol.breadcrumb
+      li
+        a(href="/")
+          i.fa.fa-dashboard
+          | Home
+      li.active Hồ sơ
+  section.content
+    .row
+      .col-md-6
+        .box.box-primary
+          .box-header.with-border
+            h3.box-title Thông tin tài khoản
+          form(action='/account/profile', method='POST')
+            input(type='hidden', name='_csrf', value=_csrf)
+            .box-body
+              .form-group
+                label(for="email") Email 
+                input.form-control(type="email",readonly, id="email", name="email", value=user.email, autocomplete='email')
+              .form-group
+                label(for="name") Họ và Tên
+                input.form-control(type="text", id="name", name="name", value=user.profile.name, autocomplete='name')
+              .form-group
+                label(for="name") Điện thoại
+                .input-group
+                  .input-group-addon
+                    i.fa.fa-phone
+                  input.form-control(type="text", id="phone", name="phone", value=user.profile.phone, autocomplete='phone')
+            .box-footer
+              button.btn.btn-primary(type="submit")
+                i.fa.fa-pencil.p-r-5
+                | Cập nhật hồ sơ
+      .col-md-6
+        .box.box-danger
+          .box-header.with-border
+            h3.box-title Thay đổi mật khẩu
+          form(action='/account/password', method='POST')
+            input(type='hidden', name='_csrf', value=_csrf)
+            .box-body
+              .form-group
+                label(for="password") Mật khẩu mới
+                input.form-control(type='password', name='password', id='password', autocomplete='new-password')
+              .form-group
+                label(for="password") Xác nhận mật khẩu
+                input.form-control(type='password', name='confirmPassword', id='confirmPassword', autocomplete='new-password')
+            .box-footer
+              button.btn.btn-primary(type="submit")
+                i.fa.fa-lock.p-r-5
+                | Thay đổi mật khẩu
+  section.content
+    .row
+      .col-md-12
+        .box.box-primary
+          .box-header.with-border
+            h3.box-title Tài khoản được liên kết
+            .box-body
+              .form-group
+                .offset-sm-3.col-md-7.pl-2
+                  if user.google
+                    p.mb-1: a.text-danger(href='/account/unlink/google') Hủy liên kết tài khoản Google của bạn
+                  else
+                    p.mb-1: a(href='/auth/google') Liên kết tài khoản Google của bạn
+                .offset-sm-3.col-md-7.pl-2
+                  if user.facebook
+                    p.mb-1: a.text-danger(href='/account/unlink/facebook') Hủy liên kết tài khoản Facebook của bạn
+                  else
+                    p.mb-1: a(href='/auth/facebook') Liên kết tài khoản Facebook của bạn

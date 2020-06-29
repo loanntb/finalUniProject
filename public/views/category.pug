@@ -1,0 +1,43 @@
+extends layout  
+
+block content
+  // ================Breadcrumb Area =================
+  section.breadcrumb_area
+    .overlay.bg-parallax(data-stellar-ratio='0.8', data-stellar-vertical-offset='0', data-background='')
+    .container
+      .page-cover.text-center
+        h2.page-cover-tittle Loại phòng
+        ol.breadcrumb
+          li
+            a(href='/') Trang chủ
+          li.active Loại phòng
+  // ================Room Details =================
+  section.blog_area.single-post-area
+    if typeof(datatype)!= "undefined"
+      .container
+        .row
+          .col-lg-8.posts-list
+            .single-post.row
+              .col-lg-12
+                .feature-img
+                  img.img-fluid(src=datatype.image?datatype.image:'', alt='')
+
+              .col-lg-9.col-md-9.blog_details
+                h2 #{datatype.name} 
+                p.excert
+                  | #{datatype.description}
+
+          .col-lg-4
+            .blog_right_sidebar
+              aside.single_sidebar_widget.post_category_widget
+                h4.widget_title Loại phòng
+                ul.list_style.cat-list
+                  if typeof(type)!= "undefined"  
+                    each item in type
+                      li
+                        a.d-flex.justify-content-between(href="/category/"+item._id+"")
+                          p #{item.name}
+
+
+
+  

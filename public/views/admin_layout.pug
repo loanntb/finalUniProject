@@ -1,0 +1,60 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title #{title} - Quản Lý Khách sạn - Đồ Án Nguyễn Thị Bích Loan
+    link(rel='stylesheet', href='/admin/vendor/bootstrap/bootstrap.min.css')
+    link(rel='stylesheet', href='/fonts/font-awesome-4.7.0/css/font-awesome.min.css')
+    link(rel='stylesheet', href='/admin/vendor/Ionicons/ionicons.min.css')
+    link(rel='stylesheet', href='/admin/css/AdminLTE.min.css')
+    link(rel='stylesheet', href='/admin/css/skins/_all-skins.min.css')
+    link(rel='stylesheet', href='/css/util.css')
+    link(rel='stylesheet', href='/admin/css/admin.css')
+    link(rel='stylesheet', href='/admin/vendor/datatables.net-bs/css/dataTables.bootstrap.min.css')
+    link(rel='stylesheet', href='/admin/vendor/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')
+    link(rel='stylesheet', href='/admin/vendor/sweetalert2/sweetalert2.min.css')
+
+    //- link(rel='stylesheet', href='/admin/vendor/bootstrap-datepicker/bootstrap-datepicker.min.css')
+    //- link(rel='stylesheet', href='/admin/vendor/bootstrap-daterangepicker/daterangepicker.css')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic')
+    block head
+  body.hold-transition.skin-blue-light.sidebar-mini
+    .wrapper
+      include partials/admin_header
+      include partials/admin_sidebar
+      .content-wrapper
+        include partials/flash
+        block content
+        //- section.content-header
+        //-   h1 Dashboard
+        //-     small Control panel
+        //-   ol.breadcrumb
+        //-     li
+        //-       a(href="#")
+        //-         i.fa.fa-dashboard Home
+        //-     li.active Dashboard
+        //- section.content
+
+    script(src='/vendor/jquery/jquery-3.2.1.min.js')
+    script(src='/admin/vendor/jquery-ui/jquery-ui.min.js')
+    script(src='/admin/vendor/bootstrap/bootstrap.min.js')
+    script(src='/admin/vendor/datatables.net/js/jquery.dataTables.min.js')
+    script(src='/admin/vendor/datatables.net-bs/js/dataTables.bootstrap.min.js')
+    script(src='/admin/vendor/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')
+    script(src='/admin/vendor/sweetalert2/sweetalert2.min.js')
+    //-script(src='/admin/vendor/upload/jquery.fileupload-ui.js')  
+    //- script(src='/admin/vendor/upload/jquery.ui.widget.js')
+    //- script(src='/admin/vendor/upload/jquery.fileupload.js')
+    //- script(src='https://blueimp.github.io/JavaScript-Templates/js/tmpl.min.js')
+    //- script(src='https://blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js')
+    //- script(src='/admin/vendor/upload/jquery.fileupload-process.js')
+    //- script(src='/admin/vendor/upload/jquery.fileupload-image.js')
+    //- script(src='/admin/vendor/moment/moment.min.js')
+    //- script(src='/admin/vendor/bootstrap-daterangepicker/daterangepicker.js')
+    //- script(src='/admin/vendor/bootstrap-datepicker/bootstrap-datepicker.js')
+    script(src='/admin/js/adminlte.min.js')
+    script(src='/admin/js/main.js')
+
+    block footer

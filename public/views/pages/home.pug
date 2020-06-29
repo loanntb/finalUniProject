@@ -1,0 +1,135 @@
+extends ../admin_layout
+block content
+  section.content-header
+    h1 Trang chủ
+    ol.breadcrumb
+      li
+        a(href="/")
+          i.fa.fa-dashboard
+          | Home
+      li.active Trang chủ
+
+  section.content    
+    .row 
+    .col-md-12       
+          .box.box-info
+            .box-header.with-border
+              h3.box-title WELCOME
+            form(action='/pages/home/welcome', method='POST', enctype='multipart/form-data')
+              input(type='hidden', name='_csrf', value=_csrf)
+              .box-body
+                .form-group
+                  label(for="description") Mô tả 
+                  input.form-control(type="text",value=data.welcome.description?data.welcome.description:'', id="description", name="description", autocomplete='description')
+                .form-group
+                  label(for="welcome_url") Đường dẫn
+                  input.form-control(type="text",value=data.welcome.welcome_url?data.welcome.welcome_url:'', id="welcome_url", name="welcome_url", autocomplete='welcome_url')
+                .form-group
+                    <label for="exampleInputFile">Upload</label>
+                    <input type="file" id="welcome" name="welcome">
+                    <p class="help-block">Kích thước ảnh: 390 x 390</p>
+                    if data.welcome.image_url
+                     input(type='hidden', name='img', value=data.welcome.image_url) 
+                     img(src=data.welcome.image_url?data.welcome.image_url:'',class="img img-thumbnail center-block",style="width: 400px;height: 300px;" , alt="")
+              .box-footer
+                button.btn.btn-primary(type="submit")
+                  i.fa.fa-save.p-r-5
+                  | Submit
+
+    .row
+            .col-md-6
+              .box.box-warning
+                .box-header.with-border
+                  h3.box-title Intro
+                form(action='/pages/home/intro', method='POST', enctype='multipart/form-data')
+                  input(type='hidden', name='_csrf', value=_csrf)
+                  input(type='hidden',id="idintro", name='id')
+                  input(type='hidden',id="intro", name='img')
+                  .box-body
+                    .form-group
+                      label(for="description") Dịch vụ 
+                      input.form-control(type="text", id="service", name="service", autocomplete='description')
+                    .form-group
+                      label(for="description") Mô tả 
+                      input.form-control(type="text", id="descriptionintro", name="description", autocomplete='description')
+                    .form-group
+                      label(for="welcome_url") Đường dẫn
+                      input.form-control(type="text", id="urlintro", name="url", autocomplete='welcome_url')
+                    .form-group
+                        <label for="exampleInputFile">Upload</label>
+                        <input type="file" id="welcome" name="intro">
+                        <p class="help-block">Kích thước ảnh: 720 x 428</p>
+                        img(src="",class="img-responsive hidden",id="imgintro",style="width: 400px;height: 300px;", alt="")
+                  .box-footer
+                    button.btn.btn-primary(type="submit")
+                      i.fa.fa-save.p-r-5
+                      | Submit    
+            .col-md-6
+              .box.box-warning
+                .box-header.with-border
+                  h3.box-title Danh sách intro
+                .box-body.table-responsive.no-padding
+                    <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>Dịch vụ</th>
+                        <th>Đường dẫn</th>
+                        <th>Image</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody> 
+                      - var i=0
+                    if typeof(data.intro)!= "undefined" 
+                      each item in data.intro     
+                          tr
+                            td= item.service
+                             //td= item.description
+                            td=item.url 
+                            td
+                              img(class="img-thumbnail" ,style="width: 50px;height: 50px;", src=item.image)
+                            td 
+                              button(class='btn btn-success' onclick="editintro("+i+")") 
+                                <i class="fa fa-pencil"></i>
+                              button(class='btn btn-danger' onclick="deleteIntro("+i+")" ) 
+                                <i class="fa fa-trash"></i>
+                              - i++;
+                    </tbody>      
+                    </table>
+
+                form(action='/pages/home/intro/delete',class="visible", method='POST',id="senddata1")
+                  input(type='hidden', name='_csrf', value=_csrf)
+                  input(type='hidden', name='id',id="imgurl1")
+                script(type='text/javascript').
+                      function deleteIntro(id){
+                        $('#imgurl1').val(id);
+                        $( "#senddata1" ).submit();
+                          };
+                          function editintro(id){
+                            var arr=[#{data.intro}] ;
+                            $('#service').val(arr[id]['service']);
+                            $('#descriptionintro').val(arr[id]['description']); 
+                            $('#urlintro').val(arr[id]['url']);
+                            $('#imgintro').attr("src", arr[id]['image']);
+                            $('#imgintro').removeClass( "hidden" );
+                            $('#intro').val(arr[id]['image']);
+                             $('#idintro').val(id);
+                          };             
+            
+                                                 
+                              
+
+                    
+                          
+                            
+                            
+                            
+                                  
+                    
+                       
+      
+      
+      
+
+                          
+           

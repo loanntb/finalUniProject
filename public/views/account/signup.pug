@@ -1,0 +1,80 @@
+//- extends ../admin_layout
+
+//- block content
+//-   .pb-2.mt-2.mb-4.border-bottom
+//-     h3 Sign up
+//-   form(id='signup-form', method='POST')
+//-     input(type='hidden', name='_csrf', value=_csrf)
+//-     .form-group.row
+//-       label.col-md-3.col-form-label.font-weight-bold.text-right(for='email') Email
+//-       .col-md-7
+//-         input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus, autocomplete='email', required)
+//-     .form-group.row
+//-       label.col-md-3.col-form-label.font-weight-bold.text-right(for='password') Password
+//-       .col-md-7
+//-         input.form-control(type='password', name='password', id='password', placeholder='Password', autocomplete='new-password', required)
+//-     .form-group.row
+//-       label.col-md-3.col-form-label.font-weight-bold.text-right(for='confirmPassword') Confirm Password
+//-       .col-md-7
+//-         input.form-control(type='password', name='confirmPassword', id='confirmPassword', placeholder='Confirm Password', autocomplete='new-password', required)
+//-     .form-group.offset-sm-3.col-md-7.pl-2
+//-       button.btn.btn-success(type='submit')
+//-         i.fas.fa-user-plus.fa-sm
+//-         | Signup
+
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title #{title}- Quản lý khách Sạn Đồ án Nguyễn Thị Bích Loan
+    link(rel='stylesheet', href='/admin/vendor/bootstrap/bootstrap.min.css')
+    link(rel='stylesheet', href='/fonts/font-awesome-4.7.0/css/font-awesome.min.css')
+    link(rel='stylesheet', href='/admin/css/AdminLTE.min.css')
+    link(rel='stylesheet', href='/admin/vendor/iCheck/square/blue.css')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic')
+
+  body.hold-transition.register-page
+    .register-box
+      .register-logo
+        a(href="/") Quản lý khách sạn
+      .register-box-body
+        p.login-box-msg Tạo mới tài khoản
+        include ../partials/flash
+        form(id='signup-form', method="post")
+          input(type='hidden', name='_csrf', value=_csrf)
+          .form-group.has-feedback
+            input.form-control(type="email", name="email", id='email', placeholder="Email", autofocus, autocomplete='email', required)
+            span.fa.fa-envelope.form-control-feedback
+          .form-group.has-feedback
+            input.form-control(type="password", name="password", id='password', placeholder="Mật khẩu", autocomplete='new-password', required)
+            span.fa.fa-lock.form-control-feedback
+          .form-group.has-feedback
+            input.form-control(type="password", name="confirmPassword", id='confirmPassword', placeholder="Nhập lại mật khẩu", autocomplete='new-password', required)
+            span.fa.fa-lock.form-control-feedback
+          .row
+            .col-xs-4
+              button.btn.btn-primary.btn-block.btn-flat(type="submit") Đăng kí
+
+        .social-auth-links.text-center
+          p - Hoặc
+          a.btn.btn-block.btn-social.btn-facebook.btn-flat(href="#")
+            i.fa.fa-facebook
+            | Đăng ký bằng Facebook
+          a.btn.btn-block.btn-social.btn-google.btn-flat(href="#")
+            i.fa.fa-google-plus
+            | Đăng ký bằng Google
+
+        a(href="/login") Bạn đã có tài khoản
+
+    script(src='/vendor/jquery/jquery-3.2.1.min.js')
+    script(src='/admin/vendor/bootstrap/bootstrap.min.js')
+    script(src='/admin/vendor/iCheck/icheck.min.js')
+    script(type="text/javascript").
+      $(function () {
+        $('input').iCheck({
+          checkboxClass: 'icheckbox_square-blue',
+          radioClass: 'iradio_square-blue',
+          increaseArea: '20%' /* optional */
+        });
+      });

@@ -1,0 +1,49 @@
+extends ../admin_layout
+block content
+  section.content-header
+    h1 Trang phòng đã đặt
+    ol.breadcrumb
+      li
+        a(href="/")
+          i.fa.fa-dashboard
+          | Home
+      li.active trang phòng đã đặt
+
+  section.content         
+    .row
+        .col-md-12
+            .box.box-success
+                .box-header.with-border
+                  h3.box-title Danh sách phòng
+                .box-body.table-responsive.no-padding
+                    <table class="table table-hover ">
+                     <thead>
+                      <tr>
+                        <th>Tên Phòng</th>
+                        <th>Ảnh</th>
+                        <th>Ngày đặt phòng </th>
+                        <th>Ngày trả phòng</th>
+                        <th>Thời gian (ngày)</th>
+                        <th>Số người</th>
+                        <th>Email</th>
+                        
+                      </tr>
+                      </thead> 
+                      <tbody>
+                      - var i=0
+                    if typeof(check)!= "undefined"
+                      each item in check    
+                          tr
+                            td= item.roomId.name                       
+                          
+                            td
+                              img(class="img-thumbnail" ,style="width: 50px;height: 50px;", src=item.roomId.image)
+                            td= item.checkin
+                            td= item.checkout
+                            td= item.duration
+                            td= item.people
+                            td= item.email
+                    <tbody>        
+                    </table>
+
+                

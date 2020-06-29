@@ -166,7 +166,6 @@ exports.postUpdateProfile = (req, res, next) => {
     user.email = req.body.email || '';
     user.profile.name = req.body.name || '';
     user.profile.phone = req.body.phone || '';
-    user.profile.dob = req.body.dob || '';
     user.save((err) => {
       if (err) {
         if (err.code === 11000) {

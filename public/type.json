@@ -1,0 +1,34 @@
+[
+  {
+    "name": "kieu 1",
+    "quantity": 1,
+    "unit": 1000000,
+    "description": "phong 1 nguoi o",
+    "image": "/uploads/room-1591068347322.jpg",
+    "floor": 1
+  },
+  {
+    "name": "kieu 2",
+    "quantity": 2,
+    "unit": 1200000,
+    "description": "phong 2 nguoi o",
+    "image": "/uploads/room-1591068347322.jpg",
+    "floor": 1
+  },
+  {
+    "name": "kieu 3",
+    "quantity": 3,
+    "unit": 1400000,
+    "description": "phong 3 nguoi o",
+    "image": "/uploads/room-1591068347322.jpg",
+    "floor": 1
+  },
+  {
+    "name": "kieu 4",
+    "quantity": 4,
+    "unit": 1600000,
+    "description": "phong 4 nguoi o",
+    "image": "/uploads/room-1591068347322.jpg",
+    "floor": 1
+  }
+]

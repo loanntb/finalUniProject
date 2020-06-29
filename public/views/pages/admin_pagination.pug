@@ -1,0 +1,15 @@
+nav.d-flex
+  ul.pagination 
+    li.page-item
+      if (page_number-1)<0
+        a.page-link.btn.disabled(href="/pages/book/room/") Trước 
+      else 
+        if (page_number-1)==0
+          a.page-link(href="/pages/book/room/") Trước 
+        else
+          a.page-link(href="/pages/book/room/"+(page_number - 1)) Trước      
+    li.page-item
+      if (parseInt(page_number) +1)>=count
+        a.page-link.btn.disabled(href="#") Tiếp  
+      else
+        a.page-link(href="/pages/book/room/"+(parseInt(page_number) +1)) Tiếp    

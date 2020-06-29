@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Ca sáng",
+    "salary": 20000,
+    "timeStart": 6,
+    "timeEnd": 14,
+    "coefficient": 100
+  },
+  {
+    "name": "Ca Chiều ",
+    "salary": 20000,
+    "timeStart": 14,
+    "timeEnd": 22,
+    "coefficient": 100
+  },
+  {
+    "name": "Ca Đêm",
+    "salary": 20000,
+    "timeStart": 22,
+    "timeEnd": 6,
+    "coefficient": 150
+  }
+]

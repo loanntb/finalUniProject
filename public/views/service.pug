@@ -1,0 +1,39 @@
+extends layout
+block content
+  section.breadcrumb_area.blog_banner_two
+    .overlay.bg-parallax(data-stellar-ratio='0.8', data-stellar-vertical-offset='0', data-background='')
+    .container
+      .page-cover.text-center
+        h2.page-cover-tittle.f_48 Thông tin dịch vụ khách sạn
+        ol.breadcrumb
+          li
+            a(href='/') Trang chủ
+          li.active Dịch vụ
+  // ================Breadcrumb Area =================
+  // Start Sample Area
+  section.sample-text-area
+    .container
+      h3.text-heading.title_color Dịch vụ
+      p.sample-text
+        | Tại khách sạn Royal Hotel Riverside, chúng tôi phục vụ bằng cả trái tim! 
+  // Start Align Area
+  .whole-wrap
+    .container
+      .section-top-border
+        h3.mb-30.title_color 
+            a(href="/service/menu") Nhà hàng
+        .row
+          .col-md-3
+            img.img-fluid(src='/roomLayout/image/bg-title-page-01.jpg', alt='menu')
+          .col-md-9.mt-sm-20.left-align-p
+            p
+              | Với vô vàn sự lựa chọn không chỉ là phở hay bánh mỳ, ẩm thực Việt Nam giờ đây là sự hòa nhập với các phong cách ẩm thực của Pháp và châu Âu.
+      .section-top-border.text-right
+        h3.mb-30.title_color 
+            a(href='/service/cafe') Coffee
+        .row
+          .col-md-9
+            p.text-right
+              | Cà phê sân vườn Khách sạn nằm trong khuôn viên sang trọng bên cạnh khách sạn sao tạo điểm nhấn độc đáo và đặc biệt. Với không gian ấm cúng được thiết kế theo lối kiến trúc mở.
+          .col-md-3
+            img.img-fluid(src='/roomLayout/image/bg-cover-video-02.jpg', alt='Coffee')

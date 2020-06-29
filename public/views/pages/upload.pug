@@ -1,0 +1,10 @@
+.file-upload
+  button.file-upload-btn(type='button', onclick="$('.file-upload-input').trigger( 'click' )") Thêm ảnh
+  .image-upload-wrap
+    input.file-upload-input#upload_file(type='file', onchange='readURL(this);', name='image',multiple)
+    .drag-text
+      h3 Chọn ảnh
+  .file-upload-content
+   .d-flex.flex-row(style="overflow: auto;") 
+  
+  

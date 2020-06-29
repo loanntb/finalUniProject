@@ -1,0 +1,68 @@
+[
+  {
+    "name": "Single bed room (SGL)",
+    "people": 1,
+    "bed": 1,
+    "price": 1000000,
+    "description": "phòng có 1 giường cho 1 người ngủ",
+    "image": "/uploads/room-1591068347322.jpg",
+    "size": 30,
+    "view": "Sea View",
+    "convenient": "máy sấy, tủ quần áo, wifi",
+    "floor": "Tầng 1",
+    "status": "",
+    "type": "5edf463482f56c1dd4c6062a"
+  },
+  {
+    "name": "Twin bed room (TWN)",
+    "people": 2,
+    "bed": 2,
+    "price": 1200000,
+    "description": "phòng có 2 giường cho 2 người ngủ",
+    "image": "/uploads/room-1591068347322.jpg",
+    "size": 45,
+    "view": "Sea View",
+    "convenient": "máy sấy, tủ quần áo, wifi",
+    "floor": "Tầng 1",
+    "type": "5edf463482f56c1dd4c6062a"
+  },
+  {
+    "name": "Double bed room (DBL)",
+    "people": 2,
+    "bed": 1,
+    "price": 1300000,
+    "description": "phòng có 1 giường lớn cho 2 người ở ngủ.",
+    "image": "/uploads/room-1591068347322.jpg",
+    "size": 60,
+    "view": "Sea View",
+    "convenient": "máy sấy, tủ quần áo, wifi",
+    "floor": "Tầng 1",
+    "type": "5edf463482f56c1dd4c6062d"
+  },
+  {
+    "name": "Triple bed room (TRPL)",
+    "people": 3,
+    "bed": 3,
+    "price": 1300000,
+    "description": "phòng 3 giường nhỏ hoặc 1 giường lớn + 1 giường nhỏ cho 3 người ngủ",
+    "image": "/uploads/room-1591068347322.jpg",
+    "size": 70,
+    "view": "Sea View",
+    "convenient": "máy sấy, tủ quần áo, wifi",
+    "floor": "Tầng 1",
+    "type": "5edf463482f56c1dd4c6062b"
+  },
+  {
+    "name": "Extra bed",
+    "people": 5,
+    "bed": 5,
+    "price": 1500000,
+    "description": "là giường kê thêm để tạo thành phòng Triple từ phòng TWN hoặc DBL.",
+    "image": "/uploads/room-1591068347322.jpg",
+    "size": 80,
+    "view": "Sea View",
+    "convenient": "máy sấy, tủ quần áo, wifi",
+    "floor": "Tầng 1",
+    "type": "5edf463482f56c1dd4c6062c"
+  }
+]

@@ -1,0 +1,74 @@
+extends layout
+
+block content
+  section.breadcrumb_area.blog_banner_two
+    .overlay.bg-parallax(data-stellar-ratio='0.8', data-stellar-vertical-offset='0', data-background='')
+    .container
+    .page-cover.text-center
+      h2.page-cover-tittle.f_48 Menu
+      ol.breadcrumb
+        li
+          a(href='/') Trang chủ
+        li
+          a(href='/service') Dịch vụ
+        li.active Nhà hàng
+
+  section.blog_categorie_area
+    .container
+      .row
+        .col-lg-6
+          .categories_post
+            img(src='/roomLayout/image/bg-title-page-01.jpg', alt='post',style="height: 260px; width: 563px;")
+            .categories_details
+              .categories_text
+                a(href='/service/menu')
+                  h5 Đồ uống
+                .border_line
+                p Tươi mát, bổ dưỡng và sảng khoái
+        .col-lg-6
+          .categories_post
+            img(src='/roomLayout/image/menu-5.jpg', alt='post',style="height: 260px; width: 563px;")
+            .categories_details
+              .categories_text
+                a(href='/service/menu')
+                  h5 Đồ ăn
+                .border_line
+                p Ngon từ thịt, ngọt từ xương
+
+  .section-top-border
+    .container
+      .row
+        .col-lg-6
+          h3.mb-30.title_color Đồ uống
+          .progress-table-wrap
+          if typeof(data.drink)!= "undefined" 
+            each item, index in data.drink  
+              .progress-table
+                .table-head
+                  .country Tên
+                  .visit Mô Tả
+                  .percentage Giá
+                .table-row
+                  .country
+                    | #{item.name}
+                  .visit #{item.description}
+                  .percentage
+                    | #{item.price}
+        .col-lg-6
+          h3.mb-30.title_color Thức ăn
+          .progress-table-wrap
+          if typeof(data.drink)!= "undefined" 
+            each item, index in data.food  
+              .progress-table
+                .table-head
+                  .country Tên
+                  .visit Mô Tả
+                  .percentage Giá
+                .table-row
+                  .country
+                    | #{item.name}
+                  .visit #{item.description}
+                  .percentage
+                    | #{item.price}
+                      
+                

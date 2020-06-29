@@ -1,0 +1,21 @@
+// ================ Accomodation Area  =================
+section.accomodation_area.section_gap
+  .container
+  if typeof(dataroom)!= "undefined"
+    .section_title.text-center
+      h2.title_color
+        a(href='/room')  Phòng
+      p
+        | Lựa chọn tiết kiệm cho tất cả quý khách.
+    .row.mb_30
+     each item in dataroom
+      .col-lg-3.col-sm-6
+        .accomodation_item.text-center
+          .hotel_img
+            img(src=item.image?item.image:'', alt="IMG-room",style="width: 360px;height: 214px;" )
+            a.btn.theme_btn.button_hover(href="/booking/"+item._id+"") Đặt phòng
+          a(href="/booking/"+item._id+"")
+            h4.sec_h4 #{item.name}
+            h5
+            | #{item.price.toLocaleString('Vn')}
+            small /đêm

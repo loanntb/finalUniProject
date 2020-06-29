@@ -1,0 +1,71 @@
+extends ../admin_layout
+block content
+  section.content-header
+    h1 Quản trị tài khoản
+    ol.breadcrumb
+      li
+        a(href="/")
+          i.fa.fa-dashboard
+          | Home
+      li.active Trang chủ
+
+  section.content             
+    .row 
+      .col-md-12       
+        .box.box-info
+          .box-header.with-border
+            h3.box-title Danh sách tài khoản 
+          .box-body.table-responsive.no-padding
+            <table class="table table-hover ">
+              <thead>
+                <tr>
+                  <th>Email </th>
+                  <th>Tên</th>
+                  <th>Điện thoại</th>
+                  <th>Quyền</th>
+                  <th>Ngày tạo</th>
+                  <th>Cập nhật</th>
+                  <th></th> 
+                </tr>
+                </thead>
+
+                <tbody>
+                each item in data
+                  tr
+                    td=item.email
+                    td=item.profile.name
+                    td=item.profile.phone
+                    td    
+                      select(onchange="role(this,'"+item._id+"')")
+                        option(value='', disabled='', selected='')=item.role?item.role:""
+                        option Admin
+                        option Receptionist
+                        option Người dùng
+                    td=item.createdAt
+                    td=item.updatedAt    
+                    td 
+                      button(class='btn btn-danger' onclick="deleteRoom('"+item._id+"','"+item.email+"')" ) 
+                        <i class="fa fa-trash"></i> 
+                </tbody>
+            </table>      
+            form(action='/account/delete',class="visible", method='POST',id="senddata2")
+              input(type='hidden', name='_csrf', value=_csrf)
+              input(type='hidden', name='id',id="imgurl2")
+              input(type='hidden', name='email',id="imgurl")
+            form(action='/account/role',class="visible", method='POST',id="senddata")
+              input(type='hidden', name='_csrf', value=_csrf)
+              input(type='hidden', name='id',id="id")
+              input(type='hidden', name='role',id="role_type")  
+            script(type='text/javascript').
+              function deleteRoom(id,email){
+                $('#imgurl2').val(id);
+                $('#imgurl').val(email);
+                $( "#senddata2" ).submit();
+                  };
+              function role(e,id){
+              //console.log(e.value +" "+id);
+                $('#id').val(id);
+                $('#role_type').val(e.value);
+                $( "#senddata" ).submit();
+
+                  };    
